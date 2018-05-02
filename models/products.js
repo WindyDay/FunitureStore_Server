@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 var ProductSchema = new Schema({
     name: {
         type: String,
-        unique: true,
+        // unique: true,
         required: [true, 'Missing product\'s name!'],
         max: 100,
     },
@@ -32,11 +32,11 @@ var ProductSchema = new Schema({
         type: String,
         max: 3000,
     },
-    author:[{
+    author:{
         type: Schema.ObjectId,
         ref: 'users',
         required: true,
-    }],
+    },
 });
 
 module.exports = mongoose.model('Products', ProductSchema);

@@ -9,14 +9,6 @@ var CategorySchema = new Schema({
         required: true,
         max: 100,
     },
-    imageURL:[{
-        type: String,
-        max: 200,
-    }],
-    description:{
-        type: String,
-        max: 3000,
-    },
 });
 
 module.exports = mongoose.model('Categories', CategorySchema);

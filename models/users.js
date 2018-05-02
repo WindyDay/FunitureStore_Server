@@ -23,11 +23,12 @@ var UserSchema = new Schema({
     },
     phone:{
         type: String,
+        requierd: true,
         max: 20,
     },
     avatarURL:{
         type: String,
-        max: 150,
+        max: 200,
     },
     birthday: {
         type: Date,
@@ -39,7 +40,7 @@ var UserSchema = new Schema({
     role: {
         type: String,
         required: [true, 'Missing user\'s role!'],
-        enum: [admin, mod, user],
+        enum: ['admin', 'mod', 'user'],
         default: 'user',  
     }
 });
