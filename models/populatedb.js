@@ -1,6 +1,6 @@
 //#!/usr/bin / env node
 
-console.log('This script populates some test books, authors, genres and bookinstances to your' +
+console.log('This script populates some data to your' +
         ' database. Specified database as argument - e.g.: populatedb mongodb://your_user' +
         'name:your_password@your_dabase_url');
 
