@@ -37,7 +37,7 @@ var categories = []
 function userCreate(email, password, fullName, phone, avatarURL, birthday, createdDate, role, cb) {
     userDetail = {
         email: email,
-        password: password,
+        password: md5(password),
         fullName: fullName,
         phone: phone,
         avatarURL: avatarURL,
