@@ -9,8 +9,12 @@ var ProductSchema = new Schema({
         required: [true, 'Missing product\'s name!'],
         max: 100,
     },
-    category: [{type: Schema.ObjectId, ref: 'categories', required: true,}],
-    imageURL:[{
+    categories: [{type: Schema.ObjectId, ref: 'categories', required: true,}],
+    thumbnail: {
+        type: String,
+        max: 500,
+    },
+    images:[{
         type: String,
         max: 500,
     }],

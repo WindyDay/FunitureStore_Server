@@ -6,7 +6,7 @@ const ProductsModel = require('../../models/products')
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     var query = ProductsModel.find({});
-    query.select('name oldPrice price imageURL');
+    query.select('name oldPrice price thumbnail');
 
     query.exec((err, productsResult)=>{
         if(!err){

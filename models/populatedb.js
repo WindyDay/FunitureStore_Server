@@ -69,16 +69,18 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
     });
 }
 
-function productCreate(name, category, imageURL, oldPrice, price, modifiedDate, description, author, cb) {
+function productCreate(name, categories, thumnail, images, oldPrice, price, modifiedDate, description, author, cb) {
     var productDetail = {
         name: name,
-        category: category,
+        categories: categories,
         price: price,
         author: author
     };
 
-    if (imageURL != false) 
-        productDetail.imageURL = imageURL;
+    if (thumnail != false) 
+        productDetail.thumnail = thumnail;
+    if (images != false) 
+        productDetail.images = images;
     if (oldPrice != false) 
         productDetail.oldPrice = oldPrice;
     if (description != false) 
@@ -179,7 +181,8 @@ function createProducts(cb) {
     async.parallel([
         function (callback) {
             productCreate('Ghế đẩu TOTEM', 
-            [categories[1]], 
+            [categories[1]],
+            'https://uma.vn/media/catalog/product/cache/2/small_image/230x/9df78eab33525d08d6e5fb8d27136e95/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/small_image/230x/9df78eab33525d08d6e5fb8d27136e95/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
@@ -193,7 +196,8 @@ function createProducts(cb) {
         },
         function (callback) {
             productCreate('Sofa giường', 
-            [categories[2], categories[3]],  
+            [categories[2], categories[3]], 
+            'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080216402758.jpg', 
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080216402758.jpg'
                 ,'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080516383060.jpg'
@@ -204,6 +208,25 @@ function createProducts(cb) {
             1990000, 
             false, 
             'Chiếc sofa "click-clack" có thể mở rộng thành giường trong tích tắc. Sofa giường TEMASEK có khung gỗ chắc chắn và phần đệm êm ái, cho bạn cảm giác thoải mái cả khi ngồi hay nằm. Sản phẩm thích hợp cho căn hộ nhỏ hoặc khi bạn có khách đột xuất.', 
+            users[3], 
+            callback);
+        },
+        function (callback) {
+            productCreate('Sofa NORMANDY', 
+            [categories[3]],  
+            'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040210934669.jpg',
+            [
+                'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040210934669.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826041210352064.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826041410336831.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826041610160733.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040510812552.jpg'
+
+            ], 
+            5900000, 
+            4290000, 
+            false, 
+            'Ghế sofa 2 chỗ NORMANDY có thiết kế hiện đại, đẹp mắt với khung gỗ chắc chắn và đệm ngồi êm ái. Hãy kết hợp vài chiếc sofa này với bàn cà phê và ghế bành NORMANDY để tiếp đãi bạn bè và khách quý đến nhà.', 
             users[3], 
             callback);
         },
