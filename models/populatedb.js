@@ -30,6 +30,9 @@ mongoose
     .connection
     .on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+db.dropDatabase();
+console.log('Database was dropped')
+console.log('Importing new data...')
 var users = []
 var products = []
 var orders = []

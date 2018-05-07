@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "startLocal": "nodemon ./bin/www",
-    "createdb": "node ./models/populatedb mongodb://localhost:27017/furnitureWeb"
+    "createdb_local": "node ./models/populatedb mongodb://localhost:27017/furnitureWeb",
+    "createdb": "node ./models/populatedb mongodb://heroku_dxj6p70x:tpusir8hc7sa07oail7t6m060d@ds217350.mlab.com:17350/heroku_dxj6p70x"
   },
   "dependencies": {
     "async": "^2.6.0",

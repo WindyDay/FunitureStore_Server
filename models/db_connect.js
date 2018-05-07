@@ -2,7 +2,9 @@
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://localhost:27017/furnitureWeb';
+// var mongoDB = 'mongodb://localhost:27017/furnitureWeb';
+var mongoDB = 'mongodb://heroku_dxj6p70x:tpusir8hc7sa07oail7t6m060d@ds217350.mlab.com:17350/heroku_dxj6p70x';
+
 mongoose.connect(mongoDB);
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;

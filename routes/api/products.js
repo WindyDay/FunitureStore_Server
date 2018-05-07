@@ -10,12 +10,11 @@ router.get('/', function(req, res, next) {
 
     query.exec((err, productsResult)=>{
         if(!err){
-            console.log(productsResult);
-
+            // console.log(productsResult);
             res.send(productsResult);
+            
         }
     })
-    console.log(object);
 });
 
 module.exports = router;
