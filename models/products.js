@@ -12,7 +12,7 @@ var ProductSchema = new Schema({
     category: [{type: Schema.ObjectId, ref: 'categories', required: true,}],
     imageURL:[{
         type: String,
-        max: 200,
+        max: 500,
     }],
     oldPrice:{
         type: Number,
