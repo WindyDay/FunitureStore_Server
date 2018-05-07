@@ -69,7 +69,7 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
     });
 }
 
-function productCreate(name, categories, thumnail, images, oldPrice, price, modifiedDate, description, author, cb) {
+function productCreate(name, categories, thumbnail, images, oldPrice, price, modifiedDate, description, author, cb) {
     var productDetail = {
         name: name,
         categories: categories,
@@ -77,8 +77,8 @@ function productCreate(name, categories, thumnail, images, oldPrice, price, modi
         author: author
     };
 
-    if (thumnail != false) 
-        productDetail.thumnail = thumnail;
+    if (thumbnail != false) 
+        productDetail.thumbnail = thumbnail;
     if (images != false) 
         productDetail.images = images;
     if (oldPrice != false) 
@@ -230,6 +230,64 @@ function createProducts(cb) {
             users[3], 
             callback);
         },
+        function (callback) {
+            productCreate('Sofa SIMPSON', 
+            [categories[3]],  
+            'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020447280074.jpg',
+            [
+                'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020447280074.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404021247578625.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404025646506129.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020047386946.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020847674769.jpg'
+
+            ], 
+            false, 
+            8490000, 
+            false, 
+            '', 
+            users[3], 
+            callback);
+        },
+        function (callback) {
+            productCreate('Sofa BOGART', 
+            [categories[3]],  
+            'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074426177994.jpg',
+            [
+                'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074426177994.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160920060856630038.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074526219700.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074626022197.jpg'
+
+            ], 
+            false, 
+            8490000, 
+            false, 
+            'Ghế sofa 3 chỗ BOGART mang phong cách Bắc Âu cổ điển với đặc trưng là lưng tựa chần nút và chân ghế chạm khắc. Khung ghế từ gỗ đặc đem lại sự vững chắc và độ bền cao. Đệm ngồi êm ái từ mút bọc polyester kết hợp lưng tựa chần nút để giữ phom dáng ghế và đưa vẻ đẹp sang trọng vào tổ ấm.', 
+            users[3], 
+            callback);
+        },
+
+        function (callback) {
+            productCreate('Sofa FUNKY', 
+            [categories[3]],  
+            'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070022317869.jpg',
+            [
+                'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070022317869.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160912022234609542.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070122081800.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907075721798284.jpg'
+                ,'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907075921361482.jpg'
+
+            ], 
+            false, 
+            7590000, 
+            false, 
+            "Material:\n Frame: Wood, mdf \n Legs: Metal, powder coated \n Cover: Microfiber',",
+            users[3], 
+            callback);
+        },
+
     ],
     // optional callback
     cb);
