@@ -3,8 +3,9 @@ var router = express.Router();
 const apiRouter = require('../routes/api')
 
 function route(app){
-  app.get('/', (req, res) =>{
+  app.get('/', (req, res, next) =>{
     res.render('index');
+    next();
   })
 
 

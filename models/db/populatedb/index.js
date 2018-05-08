@@ -16,10 +16,10 @@ if (!userArgs[0].startsWith('mongodb://')) {
 var md5 = require('md5');
 
 var async = require('async')
-var User = require('./users')
-var Product = require('./products')
-var Order = require('./orders')
-var Category = require('./categories')
+var User = require('../users')
+var Product = require('../products')
+var Order = require('../orders')
+var Category = require('../categories')
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
