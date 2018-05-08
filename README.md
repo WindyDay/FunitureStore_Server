@@ -11,13 +11,25 @@ Local db:
 </code>
 
 <h3>API</h3>
+
+<h4> Get categories list: </h4>
+<code>
+    http://localhost:3000/v1/api/categories
+</code>
+
+
 <h4> Get product lists: </h4>
 <code>
-http://localhost:3000/v1/api/products?page=2&maxResults=2
+    http://localhost:3000/v1/api/products?page=2&maxResults=2
 </code>
 default: page = 1 | maxResult = 16
 
+<h4> Get products lists match specific categories name (exact name on db): </h4>
+<code>
+    http://localhost:3000/v1/api/products?categories=Sofa&categories=Giường
+</code>
+
 <h4> Get detail of a product: </h4>
 <code>
-http://localhost:3000/v1/api/products/*ProductID*
+    http://localhost:3000/v1/api/products/*ProductID*
 </code>
