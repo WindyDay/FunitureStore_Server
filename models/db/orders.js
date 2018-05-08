@@ -6,4 +6,4 @@ var OrderSchema = new Schema({
     user:{type: Schema.ObjectId, ref: 'users', required: true,},
     product:{type: Schema.ObjectId, ref: 'products', required: true,}
 })
-module.exports = mongoose.model('Orders', OrderSchema);
+module.exports = mongoose.model('orders', OrderSchema);

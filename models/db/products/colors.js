@@ -24,4 +24,4 @@ var ColorSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('Colors', ProductSchema);
+module.exports = mongoose.model('colors', ProductSchema);
