@@ -53,141 +53,24 @@
                 </div>
                 <div class="product-list">
                     <div class="row no-gutters">
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                    <img class="product__image" src="images/product-1.jpg" alt="">
-                                </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                    <img class="product__image" src="images/product-1.jpg" alt="">
-                                </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                    <img class="product__image" src="images/product-1.jpg" alt="">
-                                </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                    <img class="product__image" src="images/product-1.jpg" alt="">
-                                </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                    <img class="product__image" src="images/product-1.jpg" alt="">
-                                </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                    <img class="product__image" src="images/product-1.jpg" alt="">
-                                </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                        <img class="product__image" src="images/product-1.jpg" alt="">
+                        {{#each products}}
+                        {{!-- {{{log this}}} --}}
+                            <div class="col-md-4 product">
+                                <figure>
+                                    <a href="products/{{this._id}}">
+                                        <img class="product__image" src="{{this.thumbnail}}" alt="">
                                     </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
+                                    <figcaption class="product__info text-center">
+                                        <p class="product__name">{{this.name}}</p>
+                                        <p class="product__old-price">{{this.oldPrice}}</p>
+                                        <p class="product__price">{{this.price}}</p>
+                                    </figcaption>
+                                </figure>
+                                <div class="text-center">
+                                    <a href="" class="btn">MUA NGAY</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                        <img class="product__image" src="images/product-1.jpg" alt="">
-                                    </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 product">
-                            <figure>
-                                <a href="">
-                                        <img class="product__image" src="images/product-1.jpg" alt="">
-                                    </a>
-                                <figcaption class="product__info text-center">
-                                    <p class="product__name">Ghế cao cấp</p>
-                                    <p class="product__old-price">2.000.000 VND</p>
-                                    <p class="product__price">1.400.000 VND</p>
-                                </figcaption>
-                            </figure>
-                            <div class="text-center">
-                                <a href="" class="btn">MUA NGAY</a>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                 </div>
             </div>

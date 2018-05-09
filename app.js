@@ -10,6 +10,10 @@ var usersRouter = require('./routes/users');
 var db = require('./models/db/db_connect');
 var route = require('./routes')
 var app = express();
+// var hbs = require('hbs')
+// hbs.registerHelper ("log", function (value) {
+//    return console.log(value);
+// });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
