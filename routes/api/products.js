@@ -2,12 +2,12 @@ var express = require('express');
 var router = express.Router();
 const ProductsModel = require('../../models/db/products')
 
-const {DEFAULT_PAGE, MAX_RESULT} = require('constants');
+const CONST = require('../../constants');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-    let page = req.query.page ? req.query.page : DEFAULT_PAGE;
-    let maxResults = req.query.maxResults ? req.query.maxResults : MAX_RESULT; //results per page
+    let page = req.query.page ? req.query.page : CONST.DEFAULT_PAGE;
+    let maxResults = req.query.maxResults ? req.query.maxResults : CONST.MAX_RESULT; //results per page
     let categories = null;
 
     (req.query.categories && Array.isArray(req.query.categories))? categories = req.query.categories : categories = [req.query.categories];
@@ -22,8 +22,9 @@ router.get('/', function(req, res, next) {
         path:'categories', 
         select:'name -_id',
     }
-    if(!categories){
-        populateQuery[match]={'name':{$in:categories}};
+    if(categories){
+        populateQuery.match={'name':{$in:categories}};
+        // console.log(populateQuery);
     }
 
     query.populate(populateQuery);
@@ -33,7 +34,7 @@ router.get('/', function(req, res, next) {
         if (err) return next(err);
 
         productsResult = productsResult.filter(e => e.categories.length)
-        console.log(productsResult);
+        // console.log(productsResult);
         res.send(productsResult);
             
     })
