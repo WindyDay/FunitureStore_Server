@@ -10,8 +10,8 @@ router.get('/', function(req, res, next) {
     let maxResults = req.query.maxResults ? req.query.maxResults : CONST.MAX_RESULT; //results per page
     let categories = null;
 
-    (req.query.categories && Array.isArray(req.query.categories))? categories = req.query.categories : categories = [req.query.categories];
-    // console.log(categories);
+    (req.query.categories && Array.isArray(req.query.categories))?  categories = [req.query.categories] : categories = req.query.categories;
+    console.log(req.query.categories && Array.isArray(req.query.categories));
     
     let query = ProductsModel.find();
     // query.where('categories').elemMatch({$in:categories})
@@ -22,9 +22,9 @@ router.get('/', function(req, res, next) {
         path:'categories', 
         select:'name -_id',
     }
+    // console.log(categories);
     if(categories){
         populateQuery.match={'name':{$in:categories}};
-        // console.log(populateQuery);
     }
 
     query.populate(populateQuery);
@@ -33,6 +33,7 @@ router.get('/', function(req, res, next) {
     query.exec((err, productsResult)=>{
         if (err) return next(err);
 
+        // console.log(productsResult);
         productsResult = productsResult.filter(e => e.categories.length)
         // console.log(productsResult);
         res.send(productsResult);

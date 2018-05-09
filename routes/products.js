@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
     })
     .then(function (response) {
       res.render('products', {products: response.data});
-      // console.log(response);
+      console.log(response.data);
     })
     .catch(function (error) {
       console.log(error);
