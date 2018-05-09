@@ -17,17 +17,23 @@ router.get('/', function(req, res, next) {
     // query.where('categories').elemMatch({$in:categories})
     query.skip((page-1)*maxResults);
     query.limit(1*maxResults);  
-    query.populate({
+
+    let populateQuery = {
         path:'categories', 
         select:'name -_id',
-        match:{'name':{$in:categories}}
-    });
+    }
+    if(!categories){
+        populateQuery[match]={'name':{$in:categories}};
+    }
+
+    query.populate(populateQuery);
     query.select('name oldPrice price thumbnail categories');
     // query.lean();
     query.exec((err, productsResult)=>{
         if (err) return next(err);
 
         productsResult = productsResult.filter(e => e.categories.length)
+        console.log(productsResult);
         res.send(productsResult);
             
     })
