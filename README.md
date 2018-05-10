@@ -33,3 +33,17 @@ default: page = 1 | maxResult = 16
 <code>
     http://localhost:3000/v1/api/products/*ProductID*
 </code>
+
+<h4> Get list of colors: </h4>
+<code>
+    http://localhost:3000/v1/api/colors
+</code>
+result:
+<code>
+ {
+    "_id": "5af4139b5d3b283e782bb3f6",
+    "name": "white",
+    "hex": "#FFFFFF",
+    "__v": 0
+},
+</code>
