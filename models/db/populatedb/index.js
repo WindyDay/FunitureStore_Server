@@ -308,8 +308,11 @@ function createProducts(cb) {
             ], 
             false, 
             7590000, 
-            false, 
-            "Material:\n Frame: Wood, mdf \n Legs: Metal, powder coated \n Cover: Microfiber',",
+            false,
+            `Material:
+            Frame: Wood, mdf
+            Legs: Metal, powder coated
+            Cover: Microfiber',`,
             _users[3], 
             [_colors[2]],
             callback);
