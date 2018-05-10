@@ -1,206 +1,213 @@
+ {{#if product}}
 <section class="container">
-        <h2 class="productName">Ghế lắc gỗ nhỏ</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <div id="bigPics">
-                    <img class="zoom-view" src="" alt="">
-                </div>
-                <div id="smallPics">
-                    <img class="default" src="/images/product-2.jpg" alt="" data-zoom-image="https://www.bluecross.org.uk/sites/default/files/assets/images/124044lpr.jpg">
-                    <img src="/images/product-1.jpg" alt="" data-zoom-image="https://www.cesarsway.com/sites/newcesarsway/files/styles/large_article_preview/public/Common-dog-behaviors-explained.jpg?itok=FSzwbBoi">
-                    <img src="/images/product-2.jpg" alt="">
-                    <img src="/images/product-1.jpg" alt="">
-                    <img src="/images/product-2.jpg" alt="">
-                </div>
-
+    <h2 class="productName">{{product.name}}</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="bigPics">
+                <img class="zoom-view" src="{{product.thumbnail}}" alt="" data-zoom-image="{{product.thumbnail}}">
+            </div>
+            <div id="smallPics">
+                {{#each product.images}}
+                <img class="default" src="{{this}}" alt="" data-zoom-image="{{this}}"> 
+                {{/each}}
             </div>
 
-            <div class="col-md-6 ">
-                <div class="productDetail">
-                    <h5 class="oldPrice">
-                        <del>2.900.000 VND</del>
-                    </h5>
-                    <h3 class="newPrice">2.500.000 VND</h3>
-                    <h4>Màu sắc:</h4>
-                    <div class="productColors">
-                        <div class="colorSample bgBlack"></div>
-                        <div class="colorSample bgRed"></div>
-                        <div class="colorSample bgYellow"></div>
-                    </div>
-                    <h4>Mô tả:</h4>
-                    <p class="productDescription">
-                        Ghế lắc dành cho trẻ em,
-                        <br> Quy cách tổng thể: 400w x 560d x 712h mm
-                        <br> Chiều cao mặt ghế 305h mm
-                        <br> Toàn bộ bằng gỗ cứng, rất chắc chắn và an toàn cho trẻ
-                        <br> Hàng có thùng
-                        <br>
-                    </p>
-                    <h4>Số lượng:</h4>
-                    <input type="number" name="numOfProducts" id="numOfProducts" value="1">
-                    <button class="btn btn-2 mt-3">THÊM VÀO GIỎ</button>
-                </div>
+        </div>
 
+        <div class="col-md-6 ">
+            <div class="productDetail">
+                <h5 class="oldPrice">
+                    <del>{{product.oldPrice}} VND</del>
+                </h5>
+                <h3 class="newPrice">{{product.price}} VND</h3>
+                <h4>Màu sắc:</h4>
+                <div class="productColors">
+                    {{#each product.colors}}
+                        <div class="colorSample" style="background:{{this.hex}}"></div>
+                    {{/each}}
+                </div>
+                <h4>Mô tả:</h4>
+                <p class="productDescription">
+                    Ghế lắc dành cho trẻ em,
+                    <br> Quy cách tổng thể: 400w x 560d x 712h mm
+                    <br> Chiều cao mặt ghế 305h mm
+                    <br> Toàn bộ bằng gỗ cứng, rất chắc chắn và an toàn cho trẻ
+                    <br> Hàng có thùng
+                    <br>
+                </p>
+                <h4>Số lượng:</h4>
+                <input type="number" name="numOfProducts" id="numOfProducts" value="1">
+                <button class="btn btn-2 mt-3">THÊM VÀO GIỎ</button>
+            </div>
+
+        </div>
+    </div>
+
+    <h3 class="cmtHeader">BÌNH LUẬN</h3>
+    <div class="row cmtForm"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <span class="ratingPoint">4.1</span>
+            <span>/254 bình luận.</span>
+            <br>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>
+            <p></p>
+            <hr style="border:3px solid #f1f1f1">
+
+            <div class="row">
+                <div class="side">
+                    <div>5 sao</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-5"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>150</div>
+                </div>
+                <div class="side">
+                    <div>4 sao</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-4"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>63</div>
+                </div>
+                <div class="side">
+                    <div>3 sao</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-3"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>15</div>
+                </div>
+                <div class="side">
+                    <div>2 sao</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-2"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>6</div>
+                </div>
+                <div class="side">
+                    <div>1 sao</div>
+                </div>
+                <div class="middle">
+                    <div class="bar-container">
+                        <div class="bar-1"></div>
+                    </div>
+                </div>
+                <div class="side right">
+                    <div>20</div>
+                </div>
             </div>
         </div>
 
-        <h3 class="cmtHeader">BÌNH LUẬN</h3>
-        <div class="row cmtForm"></div>
-        <div class="row">
-            <div class="col-md-6">
-                <span class="ratingPoint">4.1</span>
-                <span>/254 bình luận.</span>
-                <br>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <p></p>
-                <hr style="border:3px solid #f1f1f1">
-
-                <div class="row">
-                    <div class="side">
-                        <div>5 sao</div>
-                    </div>
-                    <div class="middle">
-                        <div class="bar-container">
-                            <div class="bar-5"></div>
-                        </div>
-                    </div>
-                    <div class="side right">
-                        <div>150</div>
-                    </div>
-                    <div class="side">
-                        <div>4 sao</div>
-                    </div>
-                    <div class="middle">
-                        <div class="bar-container">
-                            <div class="bar-4"></div>
-                        </div>
-                    </div>
-                    <div class="side right">
-                        <div>63</div>
-                    </div>
-                    <div class="side">
-                        <div>3 sao</div>
-                    </div>
-                    <div class="middle">
-                        <div class="bar-container">
-                            <div class="bar-3"></div>
-                        </div>
-                    </div>
-                    <div class="side right">
-                        <div>15</div>
-                    </div>
-                    <div class="side">
-                        <div>2 sao</div>
-                    </div>
-                    <div class="middle">
-                        <div class="bar-container">
-                            <div class="bar-2"></div>
-                        </div>
-                    </div>
-                    <div class="side right">
-                        <div>6</div>
-                    </div>
-                    <div class="side">
-                        <div>1 sao</div>
-                    </div>
-                    <div class="middle">
-                        <div class="bar-container">
-                            <div class="bar-1"></div>
-                        </div>
-                    </div>
-                    <div class="side right">
-                        <div>20</div>
-                    </div>
-                </div>
+        <div class="col-md-6 flex justify-content-center align-items-center">
+            <button class="btn btn-2">Bình luận sản phẩm</button>
+        </div>
+    </div>
+    <hr>
+    <div class="userComments">
+        <!-- begin a cmt -->
+        <div class="media">
+            <div class="media-left">
+                <img src="/images/img_avatar1.png" class="media-object mr-3">
             </div>
-
-            <div class="col-md-6 flex justify-content-center align-items-center">
-                <button class="btn btn-2">Bình luận sản phẩm</button>
+            <div class="media-body">
+                <div class="rating-container">
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar"></span>
+                </div>
+                <h6 class="media-heading">Nguyễn Hoài An</h6>
+                <p class="reviewParagraph ml-2">Sản phẩm tốt so với tầm giá </p>
             </div>
         </div>
-        <hr>
-        <div class="userComments">
-            <!-- begin a cmt -->
-            <div class="media">
-                <div class="media-left">
-                    <img src="/images/img_avatar1.png" class="media-object mr-3">
-                </div>
-                <div class="media-body">
-                    <div class="rating-container">
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar"></span>
-                    </div>
-                    <h6 class="media-heading">Nguyễn Hoài An</h6>
-                    <p class="reviewParagraph ml-2">Sản phẩm tốt so với tầm giá </p>
-                </div>
+        <!-- end of a cmt -->
+        <!-- begin a cmt -->
+        <div class="media">
+            <div class="media-left">
+                <img src="/images/img_avatar1.png" class="media-object mr-3">
             </div>
-            <!-- end of a cmt -->
-            <!-- begin a cmt -->
-            <div class="media">
-                <div class="media-left">
-                    <img src="/images/img_avatar1.png" class="media-object mr-3">
+            <div class="media-body">
+                <div class="rating-container">
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
+                    <span class="fa fa-star userStar checked"></span>
                 </div>
-                <div class="media-body">
-                    <div class="rating-container">
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                        <span class="fa fa-star userStar checked"></span>
-                    </div>
-                    <h6 class="media-heading">Buồn trong tôi</h6>
-                    <p class="reviewParagraph ml-2">Lắc lắc 1 hồi đứa nhỏ nhanh ngủ cực kỳ luôn</p>
-                </div>
+                <h6 class="media-heading">Buồn trong tôi</h6>
+                <p class="reviewParagraph ml-2">Lắc lắc 1 hồi đứa nhỏ nhanh ngủ cực kỳ luôn</p>
             </div>
-            <!-- end of a cmt -->
         </div>
-        <div class="userCmtNav">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-end">
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                </ul>
-            </nav>
-        </div>
-        <!-- CMT section end -->
+        <!-- end of a cmt -->
+    </div>
+    <div class="userCmtNav">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+                <li class="page-item">
+                    <a class="page-link" href="#">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#">3</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <!-- CMT section end -->
 
-        <h3 class="otherProductsHeader">SẢN PHẨM KHÁC</h3>
-        <div id="otherProducts">
-            <div>
-                <img src="/images/product-2.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-1.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-2.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-1.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-2.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-1.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-2.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-1.jpg" alt="">
-            </div>
-            <div>
-                <img src="/images/product-2.jpg" alt="">
-            </div>
+    <h3 class="otherProductsHeader">SẢN PHẨM KHÁC</h3>
+    <div id="otherProducts">
+        <div>
+            <img src="/images/product-2.jpg" alt="">
         </div>
+        <div>
+            <img src="/images/product-1.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-2.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-1.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-2.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-1.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-2.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-1.jpg" alt="">
+        </div>
+        <div>
+            <img src="/images/product-2.jpg" alt="">
+        </div>
+    </div>
 
-    </section>
+</section>
+
+{{/if}}

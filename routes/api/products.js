@@ -43,6 +43,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/:productId', function(req, res, next) {
     var query = ProductsModel.findById(req.params.productId);
+    query.populate({path: 'colors'});
     // console.log(req.params.productId);
     query.exec((err, detailResult, next)=>{
         if (err) return next(err);

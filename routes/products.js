@@ -54,10 +54,10 @@ router.get('/:productId', function (req, res, next) {
 
   _axios.get('/products/' + req.params.productId)
     .then(function (response) {
+      console.log(response.data);
       res.render('product', {
         product: response.data
       });
-      // console.log(response);
     })
     .catch(function (error) {
       console.log(error);
