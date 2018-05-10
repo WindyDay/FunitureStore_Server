@@ -41,6 +41,7 @@ var ProductSchema = new Schema({
         ref: 'users',
         required: true,
     },
+    colors:[{type:Schema.ObjectId, ref:'colors', required: true}]
 });
 
 module.exports = mongoose.model('products', ProductSchema);

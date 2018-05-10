@@ -7,6 +7,7 @@ var ColorSchema = new Schema({
         type: String,
         // unique: true,
         required: true,
+        lowercase: true,
         max: 100,
     },
     hex: {
@@ -24,4 +25,4 @@ var ColorSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('colors', ProductSchema);
+module.exports = mongoose.model('colors', ColorSchema);

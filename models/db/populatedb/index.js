@@ -20,6 +20,7 @@ var User = require('../users')
 var Product = require('../products')
 var Order = require('../orders')
 var Category = require('../categories')
+var Color = require('../products/colors')
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
@@ -33,10 +34,13 @@ mongoose
 db.dropDatabase();
 console.log('Database was dropped')
 console.log('Importing new data...')
-var users = []
-var products = []
-var orders = []
-var categories = []
+var _users = []
+var _products = []
+var _orders = []
+var _categories = []
+var _colors = []
+
+//Create one object
 function userCreate(email, password, fullName, phone, avatarURL, birthday, createdDate, role, cb) {
     userDetail = {
         email: email,
@@ -64,17 +68,18 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
             return
         }
         console.log('New User: ' + user);
-        users.push(user)
+        _users.push(user)
         cb(null, user)
     });
 }
 
-function productCreate(name, categories, thumbnail, images, oldPrice, price, modifiedDate, description, author, cb) {
+function productCreate(name, categories, thumbnail, images, oldPrice, price, modifiedDate, description, author, colors, cb) {
     var productDetail = {
         name: name,
         categories: categories,
         price: price,
-        author: author
+        author: author,
+        colors: colors,
     };
 
     if (thumbnail != false) 
@@ -87,6 +92,9 @@ function productCreate(name, categories, thumbnail, images, oldPrice, price, mod
         productDetail.description = description;
     if (modifiedDate != false) 
         productDetail.modifiedDate = modifiedDate;
+    if (colors == false){
+        productDetail.color = [_colors[1]]
+    }
     
     product = new Product(productDetail);
     product.save(function (err) {
@@ -95,7 +103,7 @@ function productCreate(name, categories, thumbnail, images, oldPrice, price, mod
             return;
         }
         console.log('New product: ' + product);
-        products.push(product)
+        _products.push(product)
         cb(null, product);
     });
 }
@@ -109,7 +117,7 @@ function categoryCreate(name, cb) {
             return;
         }
         console.log('New category: ' + category);
-        categories.push(category)
+        _orders.push(category)
         cb(null, category);
     });
 }
@@ -123,11 +131,26 @@ function orderCreate(user, product, cb) {
             return
         }
         console.log('New order: ' + order);
-        orders.push(order)
+        _orders.push(order)
         cb(null, order)
     });
 }
 
+function colorCreate(name, hex, cb){
+    var color = new Color({name: name, hex: hex})
+
+    color.save(function (err) {
+        if (err) {
+            cb(err, null)
+            return
+        }
+        console.log('New color: ' + color);
+        _colors.push(color)
+        cb(null, color)
+    });
+}
+
+//Create collections
 function createUsers(cb) {
     async.parallel([
         function (callback) {
@@ -153,7 +176,6 @@ function createUsers(cb) {
     cb);
 }
 
-
 function createCategories(cb) {
     async.parallel([
         function (callback) {
@@ -176,12 +198,11 @@ function createCategories(cb) {
     cb);
 }
 
-
 function createProducts(cb) {
     async.parallel([
         function (callback) {
             productCreate('Ghế đẩu TOTEM', 
-            [categories[1]],
+            [_orders[1]],
             'https://uma.vn/media/catalog/product/cache/2/small_image/230x/9df78eab33525d08d6e5fb8d27136e95/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/small_image/230x/9df78eab33525d08d6e5fb8d27136e95/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
@@ -191,12 +212,13 @@ function createProducts(cb) {
             199000, 
             false, 
             'Đôn gỗ cao su tự nhiên với kiểu dáng Scandinavian đơn giản, dễ di chuyển và bố trí', 
-            users[3], 
+            _users[3], 
+            [_colors[3], _colors[5]],
             callback);
         },
         function (callback) {
             productCreate('Sofa giường', 
-            [categories[2], categories[3]], 
+            [_orders[2], _orders[3]], 
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080216402758.jpg', 
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080216402758.jpg'
@@ -208,12 +230,13 @@ function createProducts(cb) {
             1990000, 
             false, 
             'Chiếc sofa "click-clack" có thể mở rộng thành giường trong tích tắc. Sofa giường TEMASEK có khung gỗ chắc chắn và phần đệm êm ái, cho bạn cảm giác thoải mái cả khi ngồi hay nằm. Sản phẩm thích hợp cho căn hộ nhỏ hoặc khi bạn có khách đột xuất.', 
-            users[3], 
+            _users[3], 
+            [_colors[2], _colors[0]],
             callback);
         },
         function (callback) {
             productCreate('Sofa NORMANDY', 
-            [categories[3]],  
+            [_orders[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040210934669.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040210934669.jpg'
@@ -227,12 +250,13 @@ function createProducts(cb) {
             4290000, 
             false, 
             'Ghế sofa 2 chỗ NORMANDY có thiết kế hiện đại, đẹp mắt với khung gỗ chắc chắn và đệm ngồi êm ái. Hãy kết hợp vài chiếc sofa này với bàn cà phê và ghế bành NORMANDY để tiếp đãi bạn bè và khách quý đến nhà.', 
-            users[3], 
+            _users[3], 
+            [_colors[0]],
             callback);
         },
         function (callback) {
             productCreate('Sofa SIMPSON', 
-            [categories[3]],  
+            [_orders[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020447280074.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020447280074.jpg'
@@ -246,12 +270,13 @@ function createProducts(cb) {
             8490000, 
             false, 
             '', 
-            users[3], 
+            _users[3], 
+            [_colors[8]],
             callback);
         },
         function (callback) {
             productCreate('Sofa BOGART', 
-            [categories[3]],  
+            [_orders[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074426177994.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074426177994.jpg'
@@ -264,13 +289,14 @@ function createProducts(cb) {
             8490000, 
             false, 
             'Ghế sofa 3 chỗ BOGART mang phong cách Bắc Âu cổ điển với đặc trưng là lưng tựa chần nút và chân ghế chạm khắc. Khung ghế từ gỗ đặc đem lại sự vững chắc và độ bền cao. Đệm ngồi êm ái từ mút bọc polyester kết hợp lưng tựa chần nút để giữ phom dáng ghế và đưa vẻ đẹp sang trọng vào tổ ấm.', 
-            users[3], 
+            _users[3], 
+            [_colors[5]],
             callback);
         },
 
         function (callback) {
             productCreate('Sofa FUNKY', 
-            [categories[3]],  
+            [_orders[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070022317869.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070022317869.jpg'
@@ -284,7 +310,8 @@ function createProducts(cb) {
             7590000, 
             false, 
             "Material:\n Frame: Wood, mdf \n Legs: Metal, powder coated \n Cover: Microfiber',",
-            users[3], 
+            _users[3], 
+            [_colors[2]],
             callback);
         },
 
@@ -296,22 +323,56 @@ function createProducts(cb) {
 function createOrders(cb) {
     async.parallel([
         function (callback) {
-           orderCreate(users[1], products[0], callback);
+           orderCreate(_users[1], _products[0], callback);
         },
         function (callback) {
-           orderCreate(users[2], products[0], callback);
+           orderCreate(_users[2], _products[0], callback);
         },
         function (callback) {
-           orderCreate(users[2], products[1], callback);
+           orderCreate(_users[2], _products[1], callback);
         },
     ],
     // optional callback
     cb);
 }
 
+function createColors(cb){
+    async.parallel([
+        function (callback) {
+           colorCreate('black', '#000000', callback);
+        },
+        function (callback) {
+            colorCreate('White', '#ffffff', callback);
+        },
+        function (callback) {
+            colorCreate('red', '#FF0000', callback);
+        },
+        function (callback) {
+            colorCreate('Yellow', '#FFFF00', callback);
+        },
+        function (callback) {
+            colorCreate('orange', '#FFA500', callback);
+        },
+        function (callback) {
+            colorCreate('Maroon', '#800000', callback);
+        },
+        function (callback) {
+            colorCreate('green', '#008000', callback);
+        },
+        function (callback) {
+            colorCreate('Pink', '#ffc0cb', callback);
+        },
+        function (callback) {
+            colorCreate('blue', '#0000ff', callback);
+        },
+
+    ],
+    // optional callback
+    cb);
+}
 async
     .series([
-        createUsers, createCategories, createProducts, createOrders
+        createUsers, createCategories, createColors, createProducts, createOrders
     ],
     // Optional callback
     function (err, results) {
