@@ -152,7 +152,7 @@ function colorCreate(name, hex, cb){
 
 //Create collections
 function createUsers(cb) {
-    async.parallel([
+    async.series([
         function (callback) {
             userCreate('001.icetea@gmail.com', '123456', 'Toi La Admin', '01668313970', 'https://media.mnn.com/assets/images/2018/02/AdorableBlackCatLookingAtCameraFromS' +
                     'ofa.jpg.653x0_q80_crop-smart.jpg',
@@ -177,7 +177,7 @@ function createUsers(cb) {
 }
 
 function createCategories(cb) {
-    async.parallel([
+    async.series([
         function (callback) {
            categoryCreate('Bàn', callback);
         },
@@ -337,7 +337,7 @@ function createOrders(cb) {
 }
 
 function createColors(cb){
-    async.parallel([
+    async.series([
         function (callback) {
            colorCreate('black', '#000000', callback);
         },
