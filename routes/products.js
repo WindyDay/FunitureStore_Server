@@ -21,12 +21,18 @@ router.get('/', function (req, res, next) {
     return _axios.get('/categories');
 
   }
-  axios.all([getProductsList(), getCategories()])
-    .then(axios.spread(function (products, categories) {
+
+  function getColors() {
+    return _axios.get('/colors');
+  }
+
+  axios.all([getProductsList(), getCategories(), getColors()])
+    .then(axios.spread(function (products, categories, colors) {
       console.log(categories.data);
       res.render('products', {
         products: products.data,
         categories: categories.data,
+        colors: colors.data,
       });
       // Both requests are now complete
     }))
@@ -46,7 +52,7 @@ router.get('/', function (req, res, next) {
 router.get('/:productId', function (req, res, next) {
   let data = null;
 
-  axios.get('/products/' + req.params.productId)
+  _axios.get('/products/' + req.params.productId)
     .then(function (response) {
       res.render('product', {
         product: response.data
@@ -55,6 +61,7 @@ router.get('/:productId', function (req, res, next) {
     })
     .catch(function (error) {
       console.log(error);
+      next(error);
     });
 });
 

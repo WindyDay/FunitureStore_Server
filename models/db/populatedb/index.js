@@ -117,7 +117,7 @@ function categoryCreate(name, cb) {
             return;
         }
         console.log('New category: ' + category);
-        _orders.push(category)
+        _categories.push(category)
         cb(null, category);
     });
 }
@@ -202,7 +202,7 @@ function createProducts(cb) {
     async.parallel([
         function (callback) {
             productCreate('Ghế đẩu TOTEM', 
-            [_orders[1]],
+            [_categories[1]],
             'https://uma.vn/media/catalog/product/cache/2/small_image/230x/9df78eab33525d08d6e5fb8d27136e95/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/small_image/230x/9df78eab33525d08d6e5fb8d27136e95/T/O/TOTEM_TOTEM_0000000004469_DINING_ROOM_-_Stools_and_Benches_2095_20160830084401098178.jpg',
@@ -218,7 +218,7 @@ function createProducts(cb) {
         },
         function (callback) {
             productCreate('Sofa giường', 
-            [_orders[2], _orders[3]], 
+            [_categories[2], _categories[3]], 
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080216402758.jpg', 
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/T/E/TEMASEK_TEMASEK_0000001076868_LIVING_ROOM_-_Sofa_Beds_12385_20171017080216402758.jpg'
@@ -236,7 +236,7 @@ function createProducts(cb) {
         },
         function (callback) {
             productCreate('Sofa NORMANDY', 
-            [_orders[3]],  
+            [_categories[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040210934669.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/N/O/NORMANDY_NORMANDY_0000001053791_LIVING_ROOM_-_Sofas_10078_20160826040210934669.jpg'
@@ -256,7 +256,7 @@ function createProducts(cb) {
         },
         function (callback) {
             productCreate('Sofa SIMPSON', 
-            [_orders[3]],  
+            [_categories[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020447280074.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/thumbnail/100x/9df78eab33525d08d6e5fb8d27136e95/S/I/SIMPSON_SIMPSON_0000001082838_LIVING_ROOM_FURNITURE_-_Sofas_12982_20180404020447280074.jpg'
@@ -276,7 +276,7 @@ function createProducts(cb) {
         },
         function (callback) {
             productCreate('Sofa BOGART', 
-            [_orders[3]],  
+            [_categories[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074426177994.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/B/O/BOGART_BOGART_0000001059588_LIVING_ROOM_-_Sofas_10657_20160907074426177994.jpg'
@@ -296,7 +296,7 @@ function createProducts(cb) {
 
         function (callback) {
             productCreate('Sofa FUNKY', 
-            [_orders[3]],  
+            [_categories[3]],  
             'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070022317869.jpg',
             [
                 'https://uma.vn/media/catalog/product/cache/2/image/1800x/040ec09b1e35df139433887a97daa66f/F/U/FUNKY_FUNKY_0000001059755_LIVING_ROOM_-_Sofas_10674_20160907070022317869.jpg'

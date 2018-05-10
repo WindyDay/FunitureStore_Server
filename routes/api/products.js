@@ -41,7 +41,7 @@ router.get('/', function(req, res, next) {
     })
 });
 
-router.get('/:productId', function(req, res) {
+router.get('/:productId', function(req, res, next) {
     var query = ProductsModel.findById(req.params.productId);
     // console.log(req.params.productId);
     query.exec((err, detailResult, next)=>{

@@ -1,8 +1,8 @@
-  <section class="container">
-        <div class="row no-gutters">
+    <section class="container">
+        <div class="row">
             <aside class="sidebar col-md-3">
                 <div class="category">
-                    <h2 class="category__title">Ghế</h2>
+                    <h2 class="category__title">Loại</h2>
                     <div class="category__container">
                         <ul class="category__list">
                             {{#each categories}}
@@ -10,27 +10,26 @@
                             {{/each}}
                         </ul>
                     </div>
-                    <h2 class="category__title">Màu sắc</h2>
+                    <h2 class="category__title mt-4">Màu sắc</h2>
                     <div class="category__container">
                         <ul class="color">
-                            <li class="color__item">red</li>
-                            <li class="color__item">green</li>
-                            <li class="color__item">blue</li>
-                            <li class="color__item">yellow</li>
-                            <li class="color__item">pink</li>
+                            {{#each colors}}
+                                <li class="color__item" style="background:{{this.hex}}"></li>
+                            {{/each}}
                         </ul>
                     </div>
-                    <h2 class="category__title">Chất liệu</h2>
+                    <h2 class="category__title mt-4">Chất liệu</h2>
                     <select name="pattern" id="pattern">
                         <option value="" selected>Tất cả</option>
                         <option value="">Gỗ</option>
                         <option value="">Kim loại</option>
                     </select>
-                    <h2 class="category__title">Giá</h2>
+                    <h2 class="category__title mt-4">Giá</h2>
                     <div class="category__container">
-                        <input type="number" min="0" placeholder="Tối thiểu" value="" pattern="[0-9]*">
-                        <input type="number" min="0" placeholder="Tối đa" value="" pattern="[0-9]*">
-                        <button class="btn-2">Tìm</button>
+                        <input class="cost-input" type="number" min="0" placeholder="Tối thiểu" value="" pattern="[0-9]*">
+                        <span>-</span>
+                        <input class="cost-input" type="number" min="0" placeholder="Tối đa" value="" pattern="[0-9]*">
+                        <button class="cost-btn">Tìm</button>
                     </div>
                 </div>
             </aside>
@@ -50,13 +49,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="product-list">
+                <div class="product-list mt-3">
                     <div class="row no-gutters">
                         {{#each products}}
-                        {{!-- {{{log this}}} --}}
                             <div class="col-md-4 product">
                                 <figure>
-                                    <a href="products/{{this._id}}">
+                                    <a href="/products/{{this._id}}">
                                         <img class="product__image" src="{{this.thumbnail}}" alt="">
                                     </a>
                                     <figcaption class="product__info text-center">
@@ -66,7 +64,7 @@
                                     </figcaption>
                                 </figure>
                                 <div class="text-center">
-                                    <a href="products/{{this._id}} class="btn">MUA NGAY</a>
+                                    <a href="/products/{{this._id}}" class="btn">MUA NGAY</a>
                                 </div>
                             </div>
                         {{/each}}
