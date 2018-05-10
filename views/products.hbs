@@ -5,10 +5,9 @@
                     <h2 class="category__title">Ghế</h2>
                     <div class="category__container">
                         <ul class="category__list">
-                            <li class="category__item">Lorem ipsum</li>
-                            <li class="category__item">Lorem ipsum</li>
-                            <li class="category__item">Lorem ipsum</li>
-                            <li class="category__item">Lorem ipsum</li>
+                            {{#each categories}}
+                                <li class="category__item"><a href="/products?categories={{this.name}}">{{this.name}}</a></li>
+                            {{/each}}
                         </ul>
                     </div>
                     <h2 class="category__title">Màu sắc</h2>
@@ -67,7 +66,7 @@
                                     </figcaption>
                                 </figure>
                                 <div class="text-center">
-                                    <a href="" class="btn">MUA NGAY</a>
+                                    <a href="products/{{this._id}} class="btn">MUA NGAY</a>
                                 </div>
                             </div>
                         {{/each}}
