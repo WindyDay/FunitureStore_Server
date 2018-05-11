@@ -22,7 +22,7 @@ _axios = axios.create({
 //         getProducts(cbFunction)
 //     });
 async function init(){
-    console.log('Initializing before test..');
+    console.log('\nInitializing before test..');
     // await _axios.get('/products').then(res => console.log(res.data))
     // await _axios.get('/categories').then(res => console.log(res.data))
 	console.log('Initialized!');
