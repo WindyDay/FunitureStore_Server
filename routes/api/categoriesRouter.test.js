@@ -8,22 +8,22 @@ _axios = axios.create({
 let fetchData = null;
 
 
-describe(CONST.TEST_API_PATH+'/colors api check', async() => {
+describe(CONST.TEST_API_PATH+'/categories api check', async() => {
     it('Loading data', async () => {
         expect.assertions(1);
-        await getColors();
+        await getCategories();
         expect(fetchData).toBeTruthy();
     });
 
-    it('Loaded 9 colors', () => {
-        expect(fetchData.length).toEqual(9);
+    it('Loaded at least one category', () => {
+        expect(fetchData.length).toBeGreaterThanOrEqual(1);
     })
 
 
-    it('Containing fields: name, hex', () => {
+    it('Containing fields: name', () => {
         let isContain = () => {
             for (e in fetchData) {
-                if (e.name && e.hex == false) return false;
+                if (e.name == false) return false;
             }
             return true;
         };
@@ -32,7 +32,7 @@ describe(CONST.TEST_API_PATH+'/colors api check', async() => {
 
     })
 
-    function getColors() {
-        return _axios.get('/colors').then(res => fetchData = res.data);;
+    function getCategories() {
+        return _axios.get('/categories').then(res => fetchData=res.data);
     }
 });
