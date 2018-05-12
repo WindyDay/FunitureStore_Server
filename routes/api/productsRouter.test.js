@@ -15,18 +15,9 @@ describe(CONST.TEST_API_PATH + '/products api check without params', async () =>
         await _axios.get('/products').then(res => fetchData = res.data);
         expect(fetchData).toBeTruthy();
     });
-    // it('Loading data', done => {
-    //     function cbFunction(data) {
-    //         fetchData = data;
-    //         // console.log(fetchData)
-    //         done();
-    //     }
-    //     getProducts(cbFunction)
-    // });
 
 
     it('Loaded at least one product', () => {
-        // fetchData.length
         expect(fetchData.length).toBeGreaterThanOrEqual(1);
     })
 
@@ -54,10 +45,9 @@ describe(CONST.TEST_API_PATH + '/products api check with params', async () => {
     });
 
 
-    // it('Loaded at least one product', () => {
-    //     console.log(fetchData);
-    //     _axios.get('/products?categories=Sofa&categories=Giường').then(res => expect(res.data.length).toBeTruthy());
-    // })
+    it('Loaded at least one product', () => {
+        expect(fetchData.length).toBeGreaterThanOrEqual(1);
+    })
 
 
     it('Containing fields:', () => {
