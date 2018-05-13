@@ -2,15 +2,16 @@ var express = require('express');
 var router = express.Router();
 const CategoriesModel = require('../../models/db/categories')
 
-router.get('/', (req, res)=>{
-    const query = CategoriesModel.find({});
-    query.select('name');
+router.get('/', getAllCategories);
 
-    query.exec((err, result)=>{
+
+function getAllCategories(req, res){
+    CategoriesModel
+    .find()
+    .exec((err, result)=>{
         if(!err){
             res.send(result);
         }
     })
-});
-
+}
 module.exports = router;
