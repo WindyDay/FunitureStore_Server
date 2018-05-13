@@ -37,16 +37,6 @@ router.get('/', function (req, res, next) {
       // Both requests are now complete
     }))
     .catch(err => next(err));
-  // axios.get('/products', {
-  //     params: req.query
-  //   })
-  //   .then(function (response) {
-  //     res.render('products', {products: response.data});
-  //     console.log(response.data);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
 });
 
 router.get('/:productId', function (req, res, next) {
