@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const apiRouter = require('../routes/api')
-const productsRouter = require('./products')
+const productsRouter = require('./client/products')
 
 function route(app){
   app.get('/', (req, res, next) =>{

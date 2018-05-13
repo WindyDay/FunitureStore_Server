@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 let axios = require('axios');
-const CONST = require('../constants');
+const CONST = require('../../constants');
 
 
 _axios = axios.create({
