@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
-
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
+const CONST = require('../../../constants')
 
 var ProductSchema = new Schema({
     name: {
@@ -53,8 +53,46 @@ var ProductSchema = new Schema({
 });
 ProductSchema.statics = {
     /**
-     * @param  {} id
-     * @param  {} cb
+     * @param  {object} options
+     * @param  {function} cb
+     */
+    load: (options, cb) => {
+        let select = options.select || 'name oldPrice price thumbnail categories'
+        let page = options.page || CONST.DEFAULT_PAGE
+        let maxResults = options.maxResults || CONST.MAX_RESULTS
+        let categories = options.categories || null
+
+
+        let query = productsModel.find()
+        query.skip((page - 1) * maxResults);
+        query.limit(1 * maxResults);
+
+        let populateQuery = {
+            path: 'categories',
+            select: 'name -_id',
+        }
+        if (categories) {
+            populateQuery.match = {
+                'name': {
+                    $in: categories
+                }
+            };
+        }
+
+        query.populate(populateQuery);
+        query.select(select);
+        query.exec(cb
+        //     (err, productsResult) => {
+        //         // console.log(productsResult);
+        //         if (err) return Promise.resolve(err, productsResult);
+        //         return Promise.resolve(err, productsResult.filter(e => e.categories.length))
+        // }
+    )
+    },
+
+    /**
+     * @param  {string} id
+     * @param  {function} cb
      */
     getById: (id, cb) => {
         return productsModel.findById(id, cb)

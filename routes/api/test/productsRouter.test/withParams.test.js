@@ -39,7 +39,7 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
         for (let e of fetchData) {
             // console.log(e.categories)
             for (let category of e.categories) {
-                if (!(category.name === 'Sofa' || category.name === 'Giường')) console.log(category)
+                // if (!(category.name === 'Sofa' || category.name === 'Giường')) console.log(category)
                 expect(category.name === 'Sofa' || category.name === 'Giường').toBeTruthy();
             }
         }

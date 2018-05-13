@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
 
   axios.all([getProductsList(), getCategories(), getColors()])
     .then(axios.spread(function (products, categories, colors) {
-      console.log(categories.data);
+      // console.log(categories.data);
       res.render('products', {
         products: products.data,
         categories: categories.data,
@@ -54,7 +54,7 @@ router.get('/:productId', function (req, res, next) {
 
   _axios.get('/products/' + req.params.productId)
     .then(function (response) {
-      console.log(response.data);
+      // console.log(response.data);
       res.render('product', {
         product: response.data
       });
