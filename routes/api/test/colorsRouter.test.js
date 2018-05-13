@@ -1,5 +1,5 @@
 let axios = require('axios');
-const CONST = require('../../constants');
+const CONST = require('../../../constants');
 
 _axios = axios.create({
     baseURL: CONST.TEST_API_PATH
@@ -9,9 +9,10 @@ let fetchData = null;
 
 
 describe(CONST.TEST_API_PATH+'/colors api check', async() => {
-    it('Loading data', async () => {
-        expect.assertions(1);
+    beforeAll(async()=>{
         await getColors();
+    })
+    it('Loading data', () => {
         expect(fetchData).toBeTruthy();
     });
 

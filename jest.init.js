@@ -11,10 +11,6 @@ _axios = axios.create({
 });
 
 async function init(){
-    console.log('userArgs:')
-    for (const iterator of process.argv) {
-        console.log(iterator)
-    }
     console.log('\nInitializing before test..');
         console.log('Fetching some data to make sure server was waked up...')
         await _axios.get('/colors').then(res =>console.log('Server is OK'))

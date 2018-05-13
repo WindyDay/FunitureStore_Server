@@ -9,39 +9,60 @@ var ProductSchema = new Schema({
         required: [true, 'Missing product\'s name!'],
         max: 100,
     },
-    categories: [{type: Schema.ObjectId, ref: 'categories', required: true,}],
+    categories: [{
+        type: Schema.ObjectId,
+        ref: 'categories',
+        required: true,
+    }],
     thumbnail: {
         type: String,
         max: 500,
     },
-    images:[{
+    images: [{
         type: String,
         max: 500,
     }],
-    oldPrice:{
+    oldPrice: {
         type: Number,
         min: 0,
     },
-    price:{
+    price: {
         type: Number,
         min: 0,
         required: true,
     },
-    modifiedDate:{
-        type: Date, 
+    modifiedDate: {
+        type: Date,
         required: true,
         default: Date.now,
     },
-    description:{
+    description: {
         type: String,
         max: 3000,
     },
-    author:{
+    author: {
         type: Schema.ObjectId,
         ref: 'users',
         required: true,
     },
-    colors:[{type:Schema.ObjectId, ref:'colors', required: true}]
+    colors: [{
+        type: Schema.ObjectId,
+        ref: 'colors',
+        required: true
+    }]
 });
+ProductSchema.statics = {
+    /**
+     * @param  {} id
+     * @param  {} cb
+     */
+    getById: (id, cb) => {
+        return productsModel.findById(id, cb)
+            .populate({
+                path: 'colors'
+            });
+    }
+}
 
-module.exports = mongoose.model('products', ProductSchema);
+const productsModel = mongoose.model('products', ProductSchema)
+module.exports = productsModel;

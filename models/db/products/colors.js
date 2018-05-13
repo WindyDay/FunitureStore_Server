@@ -25,4 +25,14 @@ var ColorSchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('colors', ColorSchema);
+ColorSchema.statics = {
+    /**
+     * @param  {} cb
+     */
+    getAll: (cb)=>{
+        colorModel.find({}, cb);
+    }
+}
+
+const colorModel = mongoose.model('colors', ColorSchema);
+module.exports = colorModel;

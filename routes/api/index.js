@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-const productsRouter = require('./products')
-const categoriesRouter = require('./categories')
-const colorsRouter = require('./colors')
+const productsRouter = require('./productsRouter')
+const categoriesRouter = require('./categoriesRouter')
+const colorsRouter = require('./colorsRouter')
 
 /* GET users listing. */
 router.use('/products', productsRouter);

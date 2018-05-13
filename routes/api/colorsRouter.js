@@ -6,11 +6,10 @@ const colorsModel = require('../../models/db/products/colors')
 router.get('/', getAllColors);
 
 function getAllColors(req, res, next) {
-    colorsModel
-        .find()
-        .exec((err, result) => {
-            if (err) return next(err);
-            return res.send(result);
-        })
+    colorsModel.getAll((err, result) => {
+        if (err) return next(err);
+        return res.send(result);
+    });
 }
+
 module.exports = router;

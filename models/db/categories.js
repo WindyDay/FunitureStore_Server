@@ -11,4 +11,11 @@ var CategorySchema = new Schema({
     },
 });
 
-module.exports = mongoose.model('categories', CategorySchema);
+CategorySchema.statics = {
+    getAll: (cb)=>{
+        categoryModel.find({}, cb);
+    }
+}
+const categoryModel = mongoose.model('categories', CategorySchema);
+
+module.exports = categoryModel;

@@ -1,47 +1,19 @@
 let axios = require('axios');
-const CONST = require('../../constants');
+const CONST = require('../../../../constants');
 
 _axios = axios.create({
     baseURL: CONST.TEST_API_PATH
 });
 
-let fetchDataWithParams = null;
-
-
-describe(CONST.TEST_API_PATH + '/products api check without params', async () => {
+describe(CONST.TEST_API_PATH + '/products api check with params', () => {
     let fetchData = null;
-    it('Loading data', async () => {
-        expect.assertions(1);
-        await _axios.get('/products').then(res => fetchData = res.data);
-        expect(fetchData).toBeTruthy();
-    });
 
-
-    it('Loaded at least one product', () => {
-        expect(fetchData.length).toBeGreaterThanOrEqual(1);
-    })
-
-
-    it('Containing fields: name, categories, price, thumbnail', () => {
-        for (let e of fetchData) {
-            expect(e.name).toBeTruthy();
-            expect(e.categories).toBeTruthy();
-            expect(e.price).toBeTruthy();
-            expect(e.thumbnail).toBeTruthy();
-        }
-
-    })
-
-
-});
-
-
-describe(CONST.TEST_API_PATH + '/products api check with params', async () => {
-    let fetchData = null;
-    it('Loading data', async () => {
+    beforeAll(async()=>{
         expect.assertions(1);
         await _axios.get('/products?categories=Sofa&categories=Giường').then(res => fetchData = res.data);
-        expect(fetchData).toBeTruthy();
+    })
+    
+    it('Loading data', async () => { expect(fetchData).toBeTruthy();
     });
 
 
@@ -75,12 +47,26 @@ describe(CONST.TEST_API_PATH + '/products api check with params', async () => {
 
     it('Loaded right categories (Giường)', () => {
         _axios.get('/products?categories=Giường')
-            .then(res => (res) => {
+            .then((res) => {
                 for (let e of res.data) {
                     for (category of e.categories) {
                         expect(category.name === 'Giường').toBeTruthy();
                     }
                 }
+            })
+            // .catch(err=>console.log(err));
+    });
+
+    it('Load a product by id', () => {
+        
+        _axios.get('/products/'+fetchData[0]._id)
+            .then((res) => {
+                let data = res.data
+                expect(data.categories.length).toBeGreaterThanOrEqual(1);
+                expect(data.name).toBeTruthy();
+                expect(data.price).toBeGreaterThanOrEqual(0);
+                expect(data.images.length).toBeGreaterThanOrEqual(1);
+                expect(data.author).toBeTruthy();
             });
     });
 });
