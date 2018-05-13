@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
         path:'categories', 
         select:'name -_id',
     }
-    console.log(categories);
+    // console.log(categories);
     if(categories){
         populateQuery.match={'name':{$in:categories}};
     }
