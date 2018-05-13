@@ -8,9 +8,9 @@ _axios = axios.create({
 let fetchData = null;
 
 
-describe(CONST.TEST_API_PATH+'/categories api check', async() => {
+describe(CONST.TEST_API_PATH + '/categories api check', async () => {
 
-    beforeAll(async()=>{
+    beforeAll(async () => {
         await getCategories();
     })
     it('Loading data', () => {
@@ -35,6 +35,8 @@ describe(CONST.TEST_API_PATH+'/categories api check', async() => {
     })
 
     function getCategories() {
-        return _axios.get('/categories').then(res => fetchData=res.data);
+        return _axios.get('/categories')
+            .then(res => fetchData = res.data)
+            .catch(err=>console.log(err))
     }
 });

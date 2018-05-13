@@ -8,8 +8,8 @@ _axios = axios.create({
 let fetchData = null;
 
 
-describe(CONST.TEST_API_PATH+'/colors api check', async() => {
-    beforeAll(async()=>{
+describe(CONST.TEST_API_PATH + '/colors api check', async () => {
+    beforeAll(async () => {
         await getColors();
     })
     it('Loading data', () => {
@@ -34,6 +34,8 @@ describe(CONST.TEST_API_PATH+'/colors api check', async() => {
     })
 
     function getColors() {
-        return _axios.get('/colors').then(res => fetchData = res.data);;
+        return _axios.get('/colors')
+            .then(res => fetchData = res.data)
+            .catch(err => console.log(err));
     }
 });

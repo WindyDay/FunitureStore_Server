@@ -7,9 +7,11 @@ _axios = axios.create({
 
 describe(CONST.TEST_API_PATH + '/products api check without params', () => {
     let fetchData = null;
-    
-    beforeAll(async()=>{
-        await _axios.get('/products').then(res => fetchData = res.data)
+
+    beforeAll(async () => {
+        await _axios.get('/products')
+            .then(res => fetchData = res.data)
+            .catch(err=>console.log(err))
     })
 
     it('Loading data', () => {

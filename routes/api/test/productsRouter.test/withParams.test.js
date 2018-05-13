@@ -9,8 +9,9 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
     let fetchData = null;
 
     beforeAll(async()=>{
-        expect.assertions(1);
-        await _axios.get('/products?categories=Sofa&categories=Giường').then(res => fetchData = res.data);
+        await _axios.get('/products?categories=Sofa&categories=Giường')
+        .then(res => fetchData = res.data)
+        .catch(err=>console.log(err));
     })
     
     it('Loading data', async () => { expect(fetchData).toBeTruthy();
@@ -46,6 +47,7 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
     });
 
     it('Loaded right categories (Giường)', () => {
+        // expect.assertions(1);
         _axios.get('/products?categories=Giường')
             .then((res) => {
                 for (let e of res.data) {
@@ -54,11 +56,10 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
                     }
                 }
             })
-            // .catch(err=>console.log(err));
+            .catch(err=>expect(false).toBeTruthy());
     });
 
     it('Load a product by id', () => {
-        
         _axios.get('/products/'+fetchData[0]._id)
             .then((res) => {
                 let data = res.data
@@ -67,6 +68,7 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
                 expect(data.price).toBeGreaterThanOrEqual(0);
                 expect(data.images.length).toBeGreaterThanOrEqual(1);
                 expect(data.author).toBeTruthy();
-            });
+            })
+            .catch(err=>expect(false).toBeTruthy());
     });
 });
