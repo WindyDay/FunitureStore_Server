@@ -23,8 +23,8 @@ _axios = axios.create({
 //     });
 async function init(){
     console.log('\nInitializing before test..');
-    // await _axios.get('/products').then(res => console.log(res.data))
-    // await _axios.get('/categories').then(res => console.log(res.data))
+        console.log('Fetching some data to make sure server was waked up...')
+        await _axios.get('/colors').then(res => console.log(console.log('Server is OK')))
 	console.log('Initialized!');
 }
 module.exports = init
