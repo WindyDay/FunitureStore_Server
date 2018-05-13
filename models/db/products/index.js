@@ -81,13 +81,10 @@ ProductSchema.statics = {
 
         query.populate(populateQuery);
         query.select(select);
-        query.exec(cb
-        //     (err, productsResult) => {
-        //         // console.log(productsResult);
-        //         if (err) return Promise.resolve(err, productsResult);
-        //         return Promise.resolve(err, productsResult.filter(e => e.categories.length))
-        // }
-    )
+        query.exec((err, productsResult) => {
+            let filteredResult = productsResult.filter(e => e.categories.length)
+            cb(err, filteredResult);
+        })
     },
 
     /**

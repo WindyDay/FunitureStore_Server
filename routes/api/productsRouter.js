@@ -22,9 +22,7 @@ function getProducts(req, res, next) {
 
     productsModel.load(options, (err, productsResult) => {
         if (err) return next(err);
-        productsResult = productsResult.filter(e => e.categories.length)
         res.send(productsResult);
-
     })
 }
 
