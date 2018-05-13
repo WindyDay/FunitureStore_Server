@@ -4,20 +4,15 @@ const apiRouter = require('../routes/api')
 const productsRouter = require('./client/products')
 
 function route(app){
-  app.get('/', (req, res, next) =>{
-    res.render('index');
-    next();
-  })
+  app.get('/', renderIndex)
   app.use('/products', productsRouter);
-
-
   app.use('/v1/api', apiRouter);
 }
 
-// /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
 
 module.exports = route;
+
+renderIndex = (req, res, next) =>{
+  res.render('index');
+  next();
+}
