@@ -9,7 +9,13 @@ _axios = axios.create({
 });
 
 /* GET products page */
-router.get('/', function (req, res, next) {
+router.get('/', renderProducts);
+router.get('/:productId', renderProductDetail);
+
+module.exports = router;
+
+
+function renderProducts(req, res, next) {
 
   function getProductsList() {
     return _axios.get('/products', {
@@ -37,9 +43,9 @@ router.get('/', function (req, res, next) {
       // Both requests are now complete
     }))
     .catch(err => next(err));
-});
+}
 
-router.get('/:productId', function (req, res, next) {
+function renderProductDetail(req, res, next) {
   let data = null;
 
   _axios.get('/products/' + req.params.productId)
@@ -53,6 +59,4 @@ router.get('/:productId', function (req, res, next) {
       console.log(error);
       next(error);
     });
-});
-
-module.exports = router;
+}
