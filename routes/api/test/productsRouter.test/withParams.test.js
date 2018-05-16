@@ -9,7 +9,7 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
     let fetchData = null;
 
     beforeAll(async()=>{
-        await _axios.get('/products?categories=Sofa&categories=Giường')
+        await _axios.get('/products?categories=Sofa&categories=Giường&colors=black&colors=maroon')
         .then(res => fetchData = res.data)
         .catch(err=>console.log(err));
     })
@@ -32,6 +32,10 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
             }
             expect(e.price).toBeTruthy();
             expect(e.thumbnail).toBeTruthy();
+            for (let color of e.colors) {
+                expect(color.name).toBeTruthy();
+                expect(color.hex).toBeTruthy();
+            }
         }
     })
 
@@ -53,6 +57,27 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
                 for (let e of res.data) {
                     for (category of e.categories) {
                         expect(category.name === 'Giường').toBeTruthy();
+                    }
+                }
+            })
+            .catch(err=>expect(false).toBeTruthy());
+    });
+
+    it('Loaded right colors (black || maroon)', () => {
+        for (let e of fetchData) {
+            for (let color of e.colors) {
+                expect(color.name === 'black' || category.name === 'maroon').toBeTruthy();
+            }
+        }
+    });
+
+    it('Loaded right colors (black)', () => {
+        // expect.assertions(1);
+        _axios.get('/products?colors=black')
+            .then((res) => {
+                for (let e of fetchData) {
+                    for (let color of e.colors) {
+                        expect(color.name === 'black').toBeTruthy();
                     }
                 }
             })
