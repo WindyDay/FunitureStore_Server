@@ -29,6 +29,11 @@ default: page = 1 | maxResult = 16
     http://localhost:3000/v1/api/products?categories=Sofa&categories=Giường
 </code>
 
+<h4> Get products lists match specific colors name (exact name on db): </h4>
+<code>
+    http://localhost:3000/v1/api/products?colors=black&colors=maroon
+</code>
+
 <h4> Get detail of a product: </h4>
 <code>
     http://localhost:3000/v1/api/products/*ProductID*

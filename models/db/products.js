@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
-const CONST = require('../../../constants')
+const CONST = require('../../constants')
 
 var ProductSchema = new Schema({
     name: {
@@ -61,28 +61,39 @@ ProductSchema.statics = {
         let page = options.page || CONST.DEFAULT_PAGE
         let maxResults = options.maxResults || CONST.MAX_RESULTS
         let categories = options.categories || null
-
+        let colors = options.colors || null 
 
         let query = productsModel.find()
         query.skip((page - 1) * maxResults);
         query.limit(1 * maxResults);
 
-        let populateQuery = {
+        let populateCategories = {
             path: 'categories',
             select: 'name -_id',
         }
         if (categories) {
-            populateQuery.match = {
+            populateCategories.match = {
                 'name': {
                     $in: categories
                 }
             };
         }
 
-        query.populate(populateQuery);
+        let populateColors = {path: 'colors'}
+        if (colors) {
+            populateColors.match = {
+                'name': {
+                    $in: colors
+                }
+            };
+        }
+        
+        query.populate(populateCategories);
+        query.populate(populateColors);
+
         query.select(select);
         query.exec((err, productsResult) => {
-            let filteredResult = productsResult.filter(e => e.categories.length)
+            let filteredResult = productsResult.filter(e => e.categories.length &&e.colors.length)
             cb(err, filteredResult);
         })
     },

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const colorsModel = require('../../models/db/products/colors')
+const colorsModel = require('../../models/db/colors')
 
 /* GET colors listing. */
 router.get('/', getAllColors);
