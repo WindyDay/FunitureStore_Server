@@ -34,6 +34,11 @@ default: page = 1 | maxResult = 16
     http://localhost:3000/v1/api/products?colors=black&colors=maroon
 </code>
 
+<h4> Get products lists with price filter: </h4>
+<code>
+    http://localhost:3000/v1/api/products?minPrice=2000000&maxPrice=5000000
+</code>
+
 <h4> Get detail of a product: </h4>
 <code>
     http://localhost:3000/v1/api/products/*ProductID*
