@@ -62,8 +62,13 @@ ProductSchema.statics = {
         let maxResults = options.maxResults || CONST.MAX_RESULTS
         let categories = options.categories || null
         let colors = options.colors || null 
+        let minPrice = options.minPrice;
+        let maxPrice = options.maxPrice;
 
         let query = productsModel.find()
+        // console.log(minPrice);
+        if(minPrice) query.where('price').gte(minPrice);
+        if(maxPrice) query.where('price').lte(maxPrice);
         query.skip((page - 1) * maxResults);
         query.limit(1 * maxResults);
 

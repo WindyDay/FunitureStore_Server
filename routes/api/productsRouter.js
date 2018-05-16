@@ -14,6 +14,8 @@ function getProducts(req, res, next) {
     options.maxResults = req.query.maxResults ? req.query.maxResults : CONST.MAX_RESULT;
     options.categories = null;
     options.colors = null;
+    options.minPrice = req.query.minPrice;
+    options.maxPrice = req.query.maxPrice;
     
     //categories query
     if (req.query.categories) {

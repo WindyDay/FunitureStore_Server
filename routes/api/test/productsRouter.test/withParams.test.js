@@ -72,9 +72,9 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
         }
     });
 
-    it('Loaded right colors (black)', async () => {
+    it('Loaded right colors (black)', () => {
         // expect.assertions(1);
-        await _axios.get('/products?colors=black')
+        _axios.get('/products?colors=black')
             .then((res) => {
                 for (let e of res.data) {
                     for (let color of e.colors) {
@@ -94,6 +94,18 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
                 expect(data.price).toBeGreaterThanOrEqual(0);
                 expect(data.images.length).toBeGreaterThanOrEqual(1);
                 expect(data.author).toBeTruthy();
+            })
+            .catch(err => expect(false).toBeTruthy());
+    });
+
+    it('Test price filter', () => {
+        // expect.assertions(1);
+        _axios.get('/products?minPrice=2000000&maxPrice=5000000')
+            .then((res) => {
+                for (let e of res.data) {
+                    expect(e.price >= minPrice).toBeTruthy();
+                    expect(e.price <= maxPrice).toBeTruthy();
+                }
             })
             .catch(err => expect(false).toBeTruthy());
     });
