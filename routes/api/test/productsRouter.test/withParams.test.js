@@ -66,7 +66,7 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
     it('Loaded right colors (black || maroon)', () => {
         for (let e of fetchData) {
             for (let color of e.colors) {
-                expect(color.name === 'black' || category.name === 'maroon').toBeTruthy();
+                expect(color.name === 'black' || color.name === 'maroon').toBeTruthy();
             }
         }
     });
