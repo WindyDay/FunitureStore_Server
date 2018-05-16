@@ -8,13 +8,14 @@ _axios = axios.create({
 describe(CONST.TEST_API_PATH + '/products api check with params', () => {
     let fetchData = null;
 
-    beforeAll(async()=>{
+    beforeAll(async () => {
         await _axios.get('/products?categories=Sofa&categories=Giường&colors=black&colors=maroon')
-        .then(res => fetchData = res.data)
-        .catch(err=>console.log(err));
+            .then(res => fetchData = res.data)
+            .catch(err => console.log(err));
     })
-    
-    it('Loading data', async () => { expect(fetchData).toBeTruthy();
+
+    it('Loading data', async () => {
+        expect(fetchData).toBeTruthy();
     });
 
 
@@ -60,7 +61,7 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
                     }
                 }
             })
-            .catch(err=>expect(false).toBeTruthy());
+            .catch(err => expect(false).toBeTruthy());
     });
 
     it('Loaded right colors (black || maroon)', () => {
@@ -71,21 +72,21 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
         }
     });
 
-    it('Loaded right colors (black)', () => {
+    it('Loaded right colors (black)', async () => {
         // expect.assertions(1);
-        _axios.get('/products?colors=black')
+        await _axios.get('/products?colors=black')
             .then((res) => {
-                for (let e of fetchData) {
+                for (let e of res.data) {
                     for (let color of e.colors) {
                         expect(color.name === 'black').toBeTruthy();
                     }
                 }
             })
-            .catch(err=>expect(false).toBeTruthy());
+            .catch(err => expect(false).toBeTruthy());
     });
 
     it('Load a product by id', () => {
-        _axios.get('/products/'+fetchData[0]._id)
+        _axios.get('/products/' + fetchData[0]._id)
             .then((res) => {
                 let data = res.data
                 expect(data.categories.length).toBeGreaterThanOrEqual(1);
@@ -94,6 +95,6 @@ describe(CONST.TEST_API_PATH + '/products api check with params', () => {
                 expect(data.images.length).toBeGreaterThanOrEqual(1);
                 expect(data.author).toBeTruthy();
             })
-            .catch(err=>expect(false).toBeTruthy());
+            .catch(err => expect(false).toBeTruthy());
     });
 });
