@@ -16,7 +16,9 @@ function getProducts(req, res, next) {
     options.colors = null;
     options.minPrice = req.query.minPrice;
     options.maxPrice = req.query.maxPrice;
-    
+    options.nameSort = req.query.nameSort;
+    options.priceSort = req.query.priceSort;
+
     //categories query
     if (req.query.categories) {
         if (Array.isArray(req.query.categories))

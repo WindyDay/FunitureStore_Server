@@ -39,6 +39,16 @@ default: page = 1 | maxResult = 16
     http://localhost:3000/v1/api/products?minPrice=2000000&maxPrice=5000000
 </code>
 
+<h4> Get products lists (price sort: 1=ASCE || -1=DESC): </h4>
+<code>
+    http://localhost:3000/v1/api/products?priceSort=1
+</code>
+
+<h4> Get products lists (name sort: 1=ASCE || -1=DESC): </h4>
+<code>
+    http://localhost:3000/v1/api/products?nameSort=1
+</code>
+
 <h4> Get detail of a product: </h4>
 <code>
     http://localhost:3000/v1/api/products/*ProductID*
