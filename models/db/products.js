@@ -66,6 +66,8 @@ ProductSchema.statics = {
         let maxPrice = options.maxPrice;
         let nameSort = options.nameSort*1;
         let priceSort = options.priceSort*1;
+        let searchKey = options.searchKey;
+
 
         let query = productsModel.find()
         if(minPrice) query.where('price').gte(minPrice);
@@ -75,6 +77,7 @@ ProductSchema.statics = {
         console.log(nameSort);
         if(nameSort) query.sort({name: nameSort})
         if(priceSort) query.sort({price: priceSort})
+        if(searchKey) query.where({'name': new RegExp(searchKey,["i"])})
 
         let populateCategories = {
             path: 'categories',

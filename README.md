@@ -49,6 +49,11 @@ default: page = 1 | maxResult = 16
     http://localhost:3000/v1/api/products?nameSort=1
 </code>
 
+<h4> Search products: </h4>
+<code>
+    http://localhost:3000/v1/api/products?searchKey=Ghế
+</code>
+
 <h4> Get detail of a product: </h4>
 <code>
     http://localhost:3000/v1/api/products/*ProductID*
