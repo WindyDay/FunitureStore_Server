@@ -4,7 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
+var session = require("express-session")
 var indexRouter = require('./routes/index');
+var passport = require('passport')
+var flash = require('connect-flash')
+var validator = require('express-validator')
 
 var db = require('./models/db/db_connect');
 var route = require('./routes')
@@ -20,21 +24,43 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
+app.use(validator());
+
+//passport initialize
+app.use(session({
+  secret: "ryanno",
+  saveUninitialized: true,
+  resave: true,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+app.use((req,res,next)=>{
+  res.locals.user = req.user || null;
+  res.locals.err_msg = req.flash('err_msg');
+  res.locals.success_msg = req.flash('success_msg');
+  next()
+})
+
+
 //router
 route(app);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

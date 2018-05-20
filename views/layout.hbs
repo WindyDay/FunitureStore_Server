@@ -44,7 +44,17 @@
             </ul>
         </nav>
     </header>
-
+    <div class="container">
+        {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+        {{/if}}
+        {{#if err_msg}}
+            <div class="alert alert-danger">{{err_msg}}</div>
+        {{/if}}
+        {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+        {{/if}}
+    </div>
     {{{body}}}
 
     <footer class="footer">
