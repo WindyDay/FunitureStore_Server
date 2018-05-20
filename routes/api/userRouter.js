@@ -2,9 +2,26 @@ var express = require('express');
 var router = express.Router();
 const usersModel = require('../../models/db/users')
 const _ = require('lodash')
+const md5 = require('md5');
+
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+
 
 router.post('/SignUp', signUp);
-router.get('/SignIn', signIn);
+
+router.post('/SignIn', (req, res, next) => {
+    req.body.email = req.body.email.trim().toLowerCase();
+    next();
+}, passport.authenticate('local', {
+    // successRedirect: '/',
+    failureRedirect: '/user/SignIn',
+    failureFlash: true
+}), (req, res, next)=>{
+    // req.flash('success_msg', 'Logged in')
+    res.redirect('/')
+}
+);
 
 
 module.exports = router;
@@ -26,7 +43,7 @@ function signUp(req, res, next) {
 
     let userInfo = {
         email: req.body.email,
-        password: req.body.password,
+        password: md5(req.body.password),
         phone: req.body.phone,
         fullName: req.body.fullName,
         avatarURL: req.body.avatarURL,
@@ -51,6 +68,6 @@ function signUp(req, res, next) {
         })
 }
 
-function signIn(req, res, next){
-    res.render('signin');
-}
+// function signIn(req, res, next) {
+//     res.render('signin');
+// }

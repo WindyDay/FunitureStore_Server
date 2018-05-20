@@ -44,5 +44,9 @@ var UserSchema = new Schema({
         default: 'user',  
     }
 });
-
+UserSchema.statics ={
+    matchPassword : (pass1, pass2)=>{
+        return pass1===pass2;
+    }
+}
 module.exports = mongoose.model('users', UserSchema);

@@ -10,30 +10,10 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
 var flash = require('connect-flash')
 var validator = require('express-validator')
+const md5 = require('md5')
 
+var usersModel = require('./models/db/users')
 
-passport.use(new LocalStrategy(
-  function (username, password, done) {
-    User.findOne({
-      username: username
-    }, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, {
-          message: 'Incorrect username.'
-        });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: 'Incorrect password.'
-        });
-      }
-      return done(null, user);
-    });
-  }
-));
 var db = require('./models/db/db_connect');
 var route = require('./routes')
 var app = express();
@@ -41,6 +21,8 @@ var app = express();
 // hbs.registerHelper ("log", function (value) {
 //    return console.log(value);
 // });
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,8 +42,8 @@ app.use(validator());
 //passport initialize
 app.use(session({
   secret: "ryanno",
-  saveUninitialized: true,
-  resave: true,
+  saveUninitialized: false,
+  resave: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -71,38 +53,51 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   res.locals.err_msg = req.flash('err_msg');
   res.locals.success_msg = req.flash('success_msg');
+  res.locals.error = req.flash('error');
   next()
 })
 
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-  },
-  function (username, password, done) {
-    User.findOne({
-      username: username
-    }, function (err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, {
-          message: 'Incorrect username.'
-        });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, {
-          message: 'Incorrect password.'
-        });
-      }
-      return done(null, user);
-    });
-  }
-));
+
 
 //router
 route(app);
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password'
+},
+function (email, password, done) {
+  // console.log(email + " are logging");
+  usersModel.findOne({
+    email: email
+  }, function (err, user) {
+    if (err) {
+      return done(err);
+    }
+    if (!user) {
+      return done(null, false, {
+        message: 'Incorrect email.'
+      });
+    }
+    if (!usersModel.matchPassword(user.password, md5(password))) {
+      // console.log('Incorrect password');
+      return done(null, false, {
+        message: 'Incorrect password.'
+      });
+    }
+    return done(null, user);
+  });
+}
+));
 
+passport.serializeUser(function (user, done) {
+done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+usersModel.findById(id, function (err, user) {
+  done(err, user);
+});
+});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
