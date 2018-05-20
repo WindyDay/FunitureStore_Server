@@ -15,44 +15,80 @@
     <title> Store</title>
 </head>
 
-
 <body>
-    <header>
-        <nav class="nav-bar">
-            <div class="logo">
-                <a class="navbar__logo" href="">
-                    <img src="/images/logo.png" alt="logo">
-                </a>
-            </div>
-            <ul class="navbar__list row no-gutters">
-                <li class="navbar__item">
-                    <a class="navbar__link" href="/">Trang chủ</a>
-                </li>
-                <li class="navbar__item active">
-                    <a class="navbar__link" href="/products">Sản phẩm</a>
-                </li>
-                <li class="navbar__item">
-                    <a class="navbar__link" href="javascript: void(0)">Giới thiệu</a>
-                </li>
-                <li class="navbar__item">
-                    <a class="navbar__link" href="javascript: void(0)">Liên hệ</a>
-                </li>
-                <li class="navbar__item">
-                    <a class="navbar__link navbar__cart" href="javascript: void(0)">
-                        <i class="fas fa-cart-plus"></i> Giỏ hàng</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <div class="container padding">
+        <header>
+            <nav class="nav-bar row no-gutters">
+                <div class="menu-btn">
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                    <span class="menu-btn__line"></span>
+                </div>
+                <div class="col-3 col-md-12">
+                    <div class="logo content">
+                        <a class="navbar__logo" href="/">
+                            <img src="/images/logo.png" alt="logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-9 col-md-12">
+                    <ul class="navbar__list row no-gutters">
+                        <li class="navbar__item active">
+                            <a class="navbar__link" href="/">Trang chủ</a>
+                        </li>
+                        <li class="navbar__item">
+                            <a class="navbar__link has-child" href="/products">Sản phẩm
+                                <i class="fas fa-chevron-down"></i>
+                            </a>
+                            <ul class="navbar__submenu">
+                                <li class="navbar__submenu-item">
+                                    <a class="navbar__submenu-link" href="/products">Tất cả</a>
+                                </li>
+                                <li class="navbar__submenu-item">
+                                    <a class="navbar__submenu-link" href="#shop">Bàn</a>
+                                </li>
+                                <li class="navbar__submenu-item">
+                                    <a class="navbar__submenu-link" href="#shop">Ghế</a>
+                                </li>
+                                <li class="navbar__submenu-item">
+                                    <a class="navbar__submenu-link" href="#shop">Kệ tủ</a>
+                                </li>
+                                <li class="navbar__submenu-item">
+                                    <a class="navbar__submenu-link" href="#shop">Sofa</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="navbar__item">
+                            <a class="navbar__link" href="javascript: void(0)">Giới thiệu</a>
+                        </li>
+                        <li class="navbar__item">
+                            <a class="navbar__link" href="javascript: void(0)">Liên hệ</a>
+                        </li>
+                        <li class="navbar__item">
+                            <a class="navbar__link navbar__cart" href="javascript: void(0)">
+                                <i class="fas fa-cart-plus"></i> Giỏ hàng</a>
+                        </li>
+                        <li class="navbar__item login-mobile">
+                            <a href="/user/signin">Đăng nhập</a>/
+                            <a href="/user/signup">Đăng ký</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="login">
+                    <a href="/user/signin">Đăng nhập</a>/
+                    <a href="/user/signup">Đăng ký</a>
+                </div>
+            </nav>
+        </header>
+
+    </div>
     <div class="container">
         {{#if success_msg}}
-            <div class="alert alert-success">{{success_msg}}</div>
-        {{/if}}
-        {{#if err_msg}}
-            <div class="alert alert-danger">{{err_msg}}</div>
-        {{/if}}
-        {{#if error}}
-            <div class="alert alert-danger">{{error}}</div>
+        <div class="alert alert-success">{{success_msg}}</div>
+        {{/if}} {{#if err_msg}}
+        <div class="alert alert-danger">{{err_msg}}</div>
+        {{/if}} {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
         {{/if}}
     </div>
     {{{body}}}

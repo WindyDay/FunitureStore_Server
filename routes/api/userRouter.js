@@ -4,6 +4,7 @@ const usersModel = require('../../models/db/users')
 const _ = require('lodash')
 
 router.post('/SignUp', signUp);
+router.get('/SignIn', signIn);
 
 
 module.exports = router;
@@ -22,7 +23,7 @@ function signUp(req, res, next) {
         req.flash('err_msg', _.first(errors).msg)
         return res.redirect('/user/signup')
     }
-    
+
     let userInfo = {
         email: req.body.email,
         password: req.body.password,
@@ -48,4 +49,8 @@ function signUp(req, res, next) {
             req.flash('err_msg', 'Email existed')
             return res.redirect('/user/signup')
         })
+}
+
+function signIn(req, res, next){
+    res.render('signin');
 }

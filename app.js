@@ -7,9 +7,33 @@ var cors = require('cors')
 var session = require("express-session")
 var indexRouter = require('./routes/index');
 var passport = require('passport')
+var LocalStrategy = require('passport-local').Strategy
 var flash = require('connect-flash')
 var validator = require('express-validator')
 
+
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+    User.findOne({
+      username: username
+    }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, {
+          message: 'Incorrect username.'
+        });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, {
+          message: 'Incorrect password.'
+        });
+      }
+      return done(null, user);
+    });
+  }
+));
 var db = require('./models/db/db_connect');
 var route = require('./routes')
 var app = express();
@@ -43,13 +67,38 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
   res.locals.user = req.user || null;
   res.locals.err_msg = req.flash('err_msg');
   res.locals.success_msg = req.flash('success_msg');
   next()
 })
 
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+  },
+  function (username, password, done) {
+    User.findOne({
+      username: username
+    }, function (err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, {
+          message: 'Incorrect username.'
+        });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, {
+          message: 'Incorrect password.'
+        });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 //router
 route(app);

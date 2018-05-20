@@ -74,7 +74,7 @@ ProductSchema.statics = {
         if(maxPrice) query.where('price').lte(maxPrice);
         query.skip((page - 1) * maxResults);
         query.limit(1 * maxResults);
-        console.log(nameSort);
+        // console.log(nameSort);
         if(nameSort) query.sort({name: nameSort})
         if(priceSort) query.sort({price: priceSort})
         if(searchKey) query.where({'name': new RegExp(searchKey,["i"])})

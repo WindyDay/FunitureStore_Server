@@ -1,75 +1,96 @@
-    <section class="container">
-        <div class="row">
-            <aside class="sidebar col-md-3">
-                <div class="category">
-                    <h2 class="category__title">Loại</h2>
-                    <div class="category__container">
-                        <ul class="category__list">
-                            {{#each categories}}
-                                <li class="category__item"><a href="/products?categories={{this.name}}">{{this.name}}</a></li>
-                            {{/each}}
-                        </ul>
+<section class="container">
+    <div class="row page-shop">
+        <aside class="sidebar col-md-3">
+            <div class="category">
+                <h4 class="category__title">Loại</i>
+                </h4>
+                <div class="category__container">
+                    <ul class="category__list">
+                        {{#each categories}}
+                        <li class="category__item">
+                            <a href="/products?categories={{this.name}}">{{this.name}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <h4 class="category__title mt-4">Màu sắc</h4>
+                <div class="category__container">
+                    <ul class="color">
+                        {{#each colors}}
+                        <li class="color__item">
+                            <label class="color__pick" style="background:{{this.hex}}">
+                                <input type="checkbox" name="color">
+                                <span class="color__check"></span>
+                            </label>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{!-- <h4 class="category__title mt-4">Chất liệu</i>
+                </h4>
+                <div class="category__container">
+                    <div class="select-wrapper">
+                        <select name="pattern" id="pattern">
+                            <option value="" selected>Tất cả</option>
+                            <option value="">Gỗ</option>
+                            <option value="">Kim loại</option>
+                        </select>
                     </div>
-                    <h2 class="category__title mt-4">Màu sắc</h2>
-                    <div class="category__container">
-                        <ul class="color">
-                            {{#each colors}}
-                                <li class="color__item" style="background:{{this.hex}}"></li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                    <h2 class="category__title mt-4">Chất liệu</h2>
-                    <select name="pattern" id="pattern">
-                        <option value="" selected>Tất cả</option>
-                        <option value="">Gỗ</option>
-                        <option value="">Kim loại</option>
-                    </select>
-                    <h2 class="category__title mt-4">Giá</h2>
-                    <div class="category__container">
-                        <input class="cost-input" type="number" min="0" placeholder="Tối thiểu" value="" pattern="[0-9]*">
-                        <span>-</span>
-                        <input class="cost-input" type="number" min="0" placeholder="Tối đa" value="" pattern="[0-9]*">
-                        <button class="cost-btn">Tìm</button>
+                </div> --}}
+                <h4 class="category__title mt-4">Giá</i>
+                </h4>
+                <div class="category__container mb-3">
+                    <input id="minPrice" class="cost-input" type="number" min="0" placeholder="Tối thiểu" value="" pattern="[0-9]*">
+                    <span>-</span>
+                    <input id="maxPrice" class="cost-input" type="number" min="0" placeholder="Tối đa" value="" pattern="[0-9]*">
+                    <button class="cost-btn">
+                        <i class="fas fa-chevron-right" id="priceFilter"></i>
+                    </button>
+                </div>
+            </div>
+        </aside>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="search-wrapper">
+                        <input type="text" class="search" placeholder="Nhập tên sản phẩm cần tìm">
+                        <i class="fas fa-search" id="searchBtn"></i>
                     </div>
                 </div>
-            </aside>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="search-wrapper">
-                            <input type="text" class="search" placeholder="Nhập tên sản phẩm cần tìm">
-                            <i class="fas fa-search"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
+                <div class="col-md-4">
+                    <div class="select-wrapper">
                         <select name="sort" id="sort" class="sort">
                             <option value="" selected>Sắp xếp</option>
-                            <option value="">Giá từ thấp đến cao</option>
-                            <option value="">Giá từ cao đến thấp</option>
+                            <option value="1" data-type="priceSort">Giá từ thấp đến cao</option>
+                            <option value="-1" data-type="priceSort">Giá từ cao đến thấp</option>
+                            <option value="1" data-type="nameSort">Từ A - Z</option>
+                            <option value="-1" data-type="nameSort">Từ Z - A</option>
                         </select>
                     </div>
                 </div>
-                <div class="product-list mt-3">
-                    <div class="row no-gutters">
-                        {{#each products}}
-                            <div class="col-md-4 product">
-                                <figure>
-                                    <a href="/products/{{this._id}}">
-                                        <img class="product__image" src="{{this.thumbnail}}" alt="">
-                                    </a>
-                                    <figcaption class="product__info text-center">
-                                        <p class="product__name">{{this.name}}</p>
-                                        <p class="product__old-price">{{this.oldPrice}}</p>
-                                        <p class="product__price">{{this.price}}</p>
-                                    </figcaption>
-                                </figure>
-                                <div class="text-center">
-                                    <a href="/products/{{this._id}}" class="btn">MUA NGAY</a>
-                                </div>
-                            </div>
-                        {{/each}}
+            </div>
+
+            <div class="product-list mt-3">
+                <div class="row no-gutters">
+                    {{#each products}}
+                    <div class="col-md-4 product">
+                        <figure>
+                            <a href="/products/{{this._id}}">
+                                <img class="product__image" src="{{this.thumbnail}}" alt="">
+                            </a>
+                            <figcaption class="product__info text-center">
+                                <p class="product__name">{{this.name}}</p>
+                                <p class="product__old-price">{{this.oldPrice}}</p>
+                                <p class="product__price">{{this.price}}</p>
+                            </figcaption>
+                        </figure>
+                        <div class="text-center">
+                            <a href="/products/{{this._id}}" class="btn btn-2">MUA NGAY</a>
+                        </div>
                     </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
