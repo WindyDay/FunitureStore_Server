@@ -20,7 +20,7 @@ var User = require('../users')
 var Product = require('../products')
 var Order = require('../orders')
 var Category = require('../categories')
-var Color = require('../products/colors')
+var Color = require('../colors')
 
 var mongoose = require('mongoose');
 var mongoDB = userArgs[0];
