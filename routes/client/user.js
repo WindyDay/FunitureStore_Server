@@ -6,6 +6,7 @@ var User = require('../../models/db/users')
 router.get('/SignIn', renderSignIn);
 router.get('/SignUp', renderSignUp);
 router.get('/SignOut', signOut);
+router.get('/manager', manager);
 
 
 module.exports = router;
@@ -25,4 +26,8 @@ function signOut(req, res, next){
   req.logout();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/user/SignIn');
+}
+
+function manager(req, res, next){
+  res.render('manager', {layout:'managerLayout'})
 }
