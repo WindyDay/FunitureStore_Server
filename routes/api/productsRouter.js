@@ -99,5 +99,5 @@ function addProduct(req, res, next) {
 }
 
 function getRelativePath(fullURL){
-    return '/' + fullURL.split("\\").slice(-2).join("\\");
+    return '/' + fullURL.split(/\/|\\\\/).slice(-2).join(/\/|\\\\/);
 }
