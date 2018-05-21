@@ -77,4 +77,4 @@ result:
 <code>
     POST=> http://localhost:9000/v1/api/product
 </code>
-![Alt text](/mdResources/addProduct.PNG?raw=true "Postman screen shot")
+<img href="https://raw.githubusercontent.com/WindyDay/FunitureStore_Server/master/mdResources/addProduct.PNG"></img>
