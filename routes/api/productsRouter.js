@@ -87,11 +87,12 @@ function addProduct(req, res, next) {
 
         productsModel.create(productInfo)
             .then((result) => {
-                console.log(result);
+                // console.log(result);
+                res.send(result);
             })
-            .catch(err => next(err));
+            // .catch(err => next(err));
 
-        console.log(productInfo);
+        // console.log(productInfo);
     });
 
 
