@@ -7,12 +7,8 @@ var cors = require('cors')
 var session = require("express-session")
 var indexRouter = require('./routes/index');
 var passport = require('passport')
-var LocalStrategy = require('passport-local').Strategy
 var flash = require('connect-flash')
 var validator = require('express-validator')
-const md5 = require('md5')
-
-var usersModel = require('./models/db/users')
 
 var db = require('./models/db/db_connect');
 var route = require('./routes')
@@ -47,6 +43,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+require('./models/passportConfig')(passport);
 
 app.use(flash());
 app.use((req, res, next) => {
@@ -61,43 +58,7 @@ app.use((req, res, next) => {
 
 //router
 route(app);
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password'
-},
-function (email, password, done) {
-  // console.log(email + " are logging");
-  usersModel.findOne({
-    email: email
-  }, function (err, user) {
-    if (err) {
-      return done(err);
-    }
-    if (!user) {
-      return done(null, false, {
-        message: 'Incorrect email.'
-      });
-    }
-    if (!usersModel.matchPassword(user.password, md5(password))) {
-      // console.log('Incorrect password');
-      return done(null, false, {
-        message: 'Incorrect password.'
-      });
-    }
-    return done(null, user);
-  });
-}
-));
 
-passport.serializeUser(function (user, done) {
-done(null, user.id);
-});
-
-passport.deserializeUser(function (id, done) {
-usersModel.findById(id, function (err, user) {
-  done(err, user);
-});
-});
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

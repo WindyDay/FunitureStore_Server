@@ -10,10 +10,7 @@ var passport = require('passport'),
 
 router.post('/SignUp', signUp);
 
-router.post('/SignIn', (req, res, next) => {
-    req.body.email = req.body.email.trim().toLowerCase();
-    next();
-}, passport.authenticate('local', {
+router.post('/SignIn', standardizeEmail, passport.authenticate('local', {
     // successRedirect: '/',
     failureRedirect: '/user/SignIn',
     failureFlash: true
@@ -71,3 +68,8 @@ function signUp(req, res, next) {
 // function signIn(req, res, next) {
 //     res.render('signin');
 // }
+
+function standardizeEmail(req, res, next){
+    req.body.email = req.body.email.trim().toLowerCase();
+    next();
+}
