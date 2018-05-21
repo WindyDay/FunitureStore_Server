@@ -14,54 +14,54 @@ Local db:
 
 <h4> Get categories list: </h4>
 <code>
-    http://localhost:3000/v1/api/categories
+    http://localhost:9000/v1/api/categories
 </code>
 
 
 <h4> Get product lists: </h4>
 <code>
-    http://localhost:3000/v1/api/products?page=2&maxResults=2
+    http://localhost:9000/v1/api/products?page=2&maxResults=2
 </code>
 default: page = 1 | maxResult = 16
 
 <h4> Get products lists match specific categories name (exact name on db): </h4>
 <code>
-    http://localhost:3000/v1/api/products?categories=Sofa&categories=Giường
+    http://localhost:9000/v1/api/products?categories=Sofa&categories=Giường
 </code>
 
 <h4> Get products lists match specific colors name (exact name on db): </h4>
 <code>
-    http://localhost:3000/v1/api/products?colors=black&colors=maroon
+    http://localhost:9000/v1/api/products?colors=black&colors=maroon
 </code>
 
 <h4> Get products lists with price filter: </h4>
 <code>
-    http://localhost:3000/v1/api/products?minPrice=2000000&maxPrice=5000000
+    http://localhost:9000/v1/api/products?minPrice=2000000&maxPrice=5000000
 </code>
 
 <h4> Get products lists (price sort: 1=ASCE || -1=DESC): </h4>
 <code>
-    http://localhost:3000/v1/api/products?priceSort=1
+    http://localhost:9000/v1/api/products?priceSort=1
 </code>
 
 <h4> Get products lists (name sort: 1=ASCE || -1=DESC): </h4>
 <code>
-    http://localhost:3000/v1/api/products?nameSort=1
+    http://localhost:9000/v1/api/products?nameSort=1
 </code>
 
 <h4> Search products: </h4>
 <code>
-    http://localhost:3000/v1/api/products?searchKey=Ghế
+    http://localhost:9000/v1/api/products?searchKey=Ghế
 </code>
 
 <h4> Get detail of a product: </h4>
 <code>
-    http://localhost:3000/v1/api/products/*ProductID*
+    http://localhost:9000/v1/api/products/*ProductID*
 </code>
 
 <h4> Get list of colors: </h4>
 <code>
-    http://localhost:3000/v1/api/colors
+    http://localhost:9000/v1/api/colors
 </code>
 result:
 <code>
@@ -72,3 +72,9 @@ result:
     "__v": 0
 },
 </code>
+
+<h4> Add a product: </h4>
+<code>
+    POST=> http://localhost:9000/v1/api/product
+</code>
+![Alt text](/mdResources/addProduct.PNG?raw=true "Postman screen shot")
