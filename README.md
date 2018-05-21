@@ -77,4 +77,4 @@ result:
 <code>
     POST=> http://localhost:9000/v1/api/product
 </code>
-<img src="mdResources/addProduct.PNG"></img>
+<img src="mdResources/addProduct.PNG" width="300"></img>
