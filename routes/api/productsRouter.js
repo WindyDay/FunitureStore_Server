@@ -55,7 +55,6 @@ function getProductById(req, res, next) {
 }
 
 function addProduct(req, res, next) {
-    // console.log(req);
     var form = new formidable.IncomingForm();
     form.multiples = true;
     form.keepExtensions = true;
@@ -78,9 +77,9 @@ function addProduct(req, res, next) {
         if (err) next(err);
         if (!files.thumbnail || !files.images) next('Did not upload enough images')
 
-        Array.isArray(!files.thumbnail) ? productInfo.thumbnail = files.thumbnail.path : productInfo.thumbnail = files.thumbnail.path;
-        Array.isArray(files.images) ? productInfo.images = files.images.map(image => image.path) : productInfo.images = [files.images.path];
-        // console.log(files.thumbnail.path);
+        Array.isArray(files.thumbnail) ? productInfo.thumbnail = getRelativePath(files.thumbnail[0].path) : productInfo.thumbnail = getRelativePath(files.thumbnail.path);
+        Array.isArray(files.images) ? productInfo.images = files.images.map(image => getRelativePath(image.path)) : productInfo.images = [getRelativePath(files.images.path)];
+        
         for (key in productInfo) {
             if (!productInfo[key]) delete productInfo[key];
         }
@@ -90,11 +89,15 @@ function addProduct(req, res, next) {
                 // console.log(result);
                 res.send(result);
             })
-            // .catch(err => next(err));
+            .catch(err => next(err));
 
         // console.log(productInfo);
     });
 
 
     // if(!req.body.categories)
+}
+
+function getRelativePath(fullURL){
+    return '/' + fullURL.split("\\").slice(-2).join("\\");
 }
