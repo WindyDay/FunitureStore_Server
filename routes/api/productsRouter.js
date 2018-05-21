@@ -1,11 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const productsModel = require('../../models/db/products')
-
+const _ = require('lodash')
 const CONST = require('../../constants');
+const formidable = require('formidable')
+const path = require('path')
 
 router.get('/', getProducts);
 router.get('/:productId', getProductById);
+router.post('/', addProduct);
+
+
+module.exports = router;
+
 
 function getProducts(req, res, next) {
     let options = {};
@@ -19,7 +26,7 @@ function getProducts(req, res, next) {
     options.nameSort = req.query.nameSort;
     options.priceSort = req.query.priceSort;
     options.searchKey = req.query.searchKey;
-    
+
     //categories query
     if (req.query.categories) {
         if (Array.isArray(req.query.categories))
@@ -46,4 +53,47 @@ function getProductById(req, res, next) {
         res.send(result);
     })
 }
-module.exports = router;
+
+function addProduct(req, res, next) {
+    // console.log(req);
+    var form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.keepExtensions = true;
+    form.uploadDir = path.join(__dirname, '/../../public/upload');
+
+
+    form.parse(req, (err, fields, files) => {
+
+        let productInfo = {
+            name: fields.name,
+            oldPrice: fields.oldPrice,
+            price: fields.price,
+            modifiedDate: fields.modifiedDate,
+            description: fields.description,
+            author: fields.author,
+        };
+        if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
+        if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
+        // console.log(fields);
+        if (err) next(err);
+        if (!files.thumbnail || !files.images) next('Did not upload enough images')
+
+        Array.isArray(!files.thumbnail) ? productInfo.thumbnail = files.thumbnail.path : productInfo.thumbnail = files.thumbnail.path;
+        Array.isArray(files.images) ? productInfo.images = files.images.map(image => image.path) : productInfo.images = [files.images.path];
+        // console.log(files.thumbnail.path);
+        for (key in productInfo) {
+            if (!productInfo[key]) delete productInfo[key];
+        }
+
+        productsModel.create(productInfo)
+            .then((result) => {
+                console.log(result);
+            })
+            .catch(err => next(err));
+
+        console.log(productInfo);
+    });
+
+
+    // if(!req.body.categories)
+}
