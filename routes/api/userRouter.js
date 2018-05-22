@@ -20,6 +20,7 @@ router.post('/SignIn', standardizeEmail, passport.authenticate('local', {
 }
 );
 
+router.put('/role', updateRole)
 
 module.exports = router;
 
@@ -72,4 +73,14 @@ function signUp(req, res, next) {
 function standardizeEmail(req, res, next){
     req.body.email = req.body.email.trim().toLowerCase();
     next();
+}
+
+function updateRole(req, res, next){
+    if(!req.body.userId || !req.body.role) return next('Need userID and new role')
+    usersModel.findByIdAndUpdate(req.body.userId, {role: req.body.role})
+    .then((result)=>{
+        res.send(result);
+    })
+    .catch(err=>next(err));
+    
 }

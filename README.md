@@ -80,8 +80,20 @@ result:
 <img src="mdResources/addProduct.PNG" width="500"></img>
 
 
-<h4> Edit a product(need to login first): </h4>7
+<h4> Edit a product(need to login first): </h4>
 <code>
     PUT => http://localhost:9000/v1/api/product
 </code>
 <img src="mdResources/editProduct.PNG" width="500"></img>
+
+<h4> Delete a product: </h4>
+<code>
+    need productID in body
+    DELETE => http://localhost:9000/v1/api/product
+</code>
+
+<h4>Update user role: </h4>
+<code>
+    need userID and role in body
+    PUT => http://localhost:9000/v1/api/user/role
+</code>
