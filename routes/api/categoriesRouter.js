@@ -7,7 +7,7 @@ router.get('/', getAllCategories);
 
 function getAllCategories(req, res, next) {
     CategoriesModel.getAll((err, result) => {
-        if (err) next(err);
+        if (err) return next(err);
         res.send(result);
     })
 }
