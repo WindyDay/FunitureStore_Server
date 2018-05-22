@@ -78,3 +78,10 @@ result:
     POST=> http://localhost:9000/v1/api/product
 </code>
 <img src="mdResources/addProduct.PNG" width="500"></img>
+
+
+<h4> Edit a product(need to login first): </h4>7
+<code>
+    PUT => http://localhost:9000/v1/api/product
+</code>
+<img src="mdResources/editProduct.PNG" width="500"></img>
