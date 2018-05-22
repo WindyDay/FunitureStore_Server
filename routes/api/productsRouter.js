@@ -62,24 +62,24 @@ function addProduct(req, res, next) {
 
 
     form.parse(req, (err, fields, files) => {
-
+        if(!req.user) return next('Need to login first')
         let productInfo = {
             name: fields.name,
             oldPrice: fields.oldPrice,
             price: fields.price,
             modifiedDate: fields.modifiedDate,
             description: fields.description,
-            author: fields.author,
+            author: req.user._id,
         };
         if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
         if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
         // console.log(fields);
-        if (err) next(err);
-        if (!files.thumbnail || !files.images) next('Did not upload enough images')
+        if (err) return next(err);
+        if (!files.thumbnail || !files.images == undefined) return next('Did not upload enough images')
 
         Array.isArray(files.thumbnail) ? productInfo.thumbnail = getRelativePath(files.thumbnail[0].path) : productInfo.thumbnail = getRelativePath(files.thumbnail.path);
         Array.isArray(files.images) ? productInfo.images = files.images.map(image => getRelativePath(image.path)) : productInfo.images = [getRelativePath(files.images.path)];
-        
+
         for (key in productInfo) {
             if (!productInfo[key]) delete productInfo[key];
         }
@@ -98,6 +98,6 @@ function addProduct(req, res, next) {
     // if(!req.body.categories)
 }
 
-function getRelativePath(fullURL){
+function getRelativePath(fullURL) {
     return '/' + fullURL.split(/\/|\\\\/).slice(-2).join('/');
 }
