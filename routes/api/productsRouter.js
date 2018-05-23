@@ -116,13 +116,14 @@ function editProduct(req, res, next) {
     form.parse(req, (err, fields, files) => {
         // console.log(files);
         if (err) return next(err);
-        if (!req.user) return next('Need to login first')
+        // if (!req.user) return next('Need to login first')
+
         let productInfo = {
             name: fields.name,
             oldPrice: fields.oldPrice,
             price: fields.price,
             description: fields.description,
-            author: req.user._id,
+            // author: req.user._id,
         };
         let deteledImages = fields.deteledImages;
         let oldImages = null;
