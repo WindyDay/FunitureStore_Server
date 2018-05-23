@@ -76,8 +76,8 @@ function standardizeEmail(req, res, next){
 }
 
 function updateRole(req, res, next){
-    if(!req.body.userId || !req.body.role) return next('Need userID and new role')
-    usersModel.findByIdAndUpdate(req.body.userId, {role: req.body.role})
+    if(!req.body.email || !req.body.role) return next('Need userID and new role')
+    usersModel.findOneAndUpdate({email:req.body.email}, {role: req.body.role})
     .then((result)=>{
         res.send(result);
     })
