@@ -5,7 +5,7 @@ const _ = require('lodash')
 const CONST = require('../../constants');
 const formidable = require('formidable')
 const path = require('path')
-// mongoose = require('mongoose').set('debug', true);
+mongoose = require('mongoose').set('debug', true);
 
 router.get('/', getProducts);
 router.get('/:productId', getProductById);
@@ -114,7 +114,7 @@ function editProduct(req, res, next) {
 
 
     form.parse(req, (err, fields, files) => {
-        // console.log(files);
+        // console.log(fields);
         if (err) return next(err);
         // if (!req.user) return next('Need to login first')
 
@@ -125,11 +125,21 @@ function editProduct(req, res, next) {
             description: fields.description,
             // author: req.user._id,
         };
-        let deteledImages = fields.deteledImages;
+        let deteledImages =null;
+        if (deteledImages)
+        try {
+            deteledImages = JSON.parse(fields.deteledImages);;
+        } catch (err) {
+            console.log(err);
+            return res.send(err)
+        }
+        // console.log(deteledImages);
+
         let oldImages = null;
         let newlyAddedImages = [];
         if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
-        if (deteledImages) deteledImages = _.flatten([fields.deteledImages]);
+        if (deteledImages) deteledImages = _.flatten([deteledImages]);
+        // console.log('deteledImages.length='+deteledImages.length);
         if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
         // console.log(fields);
         // if (!editedImagesList.length && !files.images) return next('Did not upload enough images')
@@ -146,31 +156,29 @@ function editProduct(req, res, next) {
 
         // productInfo.images = editedImagesList;\♥
         productsModel.findById(fields.productID).lean().exec((err, result) => {
-            // console.log(err);
-            if (err) return next(err);
-            // console.log(result);
+            if (err) return res.send(err);
             oldImages = result.images;
+            productInfo.images = [..._.difference(oldImages, deteledImages), ...newlyAddedImages];
+            if (!productInfo.images.length) return next('Did not upload enough images')
+
+            let query = {
+                _id: fields.productID
+            }
+            productsModel.updateOne(query, productInfo)
+                .then((result) => {
+                    // console.log(result);
+                    res.send(result);
+                })
+                .catch(err => res.send(err));
+
         })
-        productInfo.images = [..._.difference(oldImages, deteledImages), ...newlyAddedImages];
-
-        if (!productInfo.images.length) return next('Did not upload enough images')
-
-        let query = {
-            _id: fields.productID
-        }
-        productsModel.updateOne(query, productInfo)
-            .then((result) => {
-                // console.log(result);
-                res.send(result);
-            })
-            .catch(err => next(err));
 
         // console.log(productInfo);
     });
 }
 
 function deleteProduct(req, res, next) {
-    if(!req.body.productID) return next('Id not found')
+    if (!req.body.productID) return next('Id not found')
     productsModel.findOneAndRemove(req.body.productID)
         .then((result) => {
             res.send(result);

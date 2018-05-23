@@ -3,7 +3,6 @@ var router = express.Router();
 const usersModel = require('../../models/db/users')
 const _ = require('lodash')
 const md5 = require('md5');
-
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 
