@@ -82,6 +82,7 @@ result:
 
 <h4> Edit a product(need to login first): </h4>
 <code>
+    deletedImages array NEED to be a string (use JSON.stringify) due to formdata cannot parse array</br>
     PUT => http://localhost:9000/v1/api/product
 </code>
 <img src="mdResources/editProduct.PNG" width="500"></img>

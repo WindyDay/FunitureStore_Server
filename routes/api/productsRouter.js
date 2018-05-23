@@ -125,21 +125,21 @@ function editProduct(req, res, next) {
             description: fields.description,
             // author: req.user._id,
         };
-        let deteledImages = fields.deteledImages;
-        if (deteledImages)
+        let deletedImages = fields.deletedImages;
+        if (deletedImages)
         try {
-            deteledImages = JSON.parse(fields.deteledImages);;
+            deletedImages = JSON.parse(fields.deletedImages);;
         } catch (err) {
             console.log(err);
             return res.send(err)
         }
-        // console.log(deteledImages);
+        // console.log(deletedImages);
 
         let oldImages = null;
         let newlyAddedImages = [];
         if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
-        if (deteledImages) deteledImages = _.flatten([deteledImages]);
-        // console.log('deteledImages.length='+deteledImages.length);
+        if (deletedImages) deletedImages = _.flatten([deletedImages]);
+        // console.log('deletedImages.length='+deletedImages.length);
         if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
         // console.log(fields);
         // if (!editedImagesList.length && !files.images) return next('Did not upload enough images')
@@ -158,7 +158,7 @@ function editProduct(req, res, next) {
         productsModel.findById(fields.productID).lean().exec((err, result) => {
             if (err) return res.send(err);
             oldImages = result.images;
-            productInfo.images = [..._.difference(oldImages, deteledImages), ...newlyAddedImages];
+            productInfo.images = [..._.difference(oldImages, deletedImages), ...newlyAddedImages];
             if (!productInfo.images.length) return next('Did not upload enough images')
 
             let query = {
