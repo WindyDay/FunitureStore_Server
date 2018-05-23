@@ -125,7 +125,7 @@ function editProduct(req, res, next) {
             description: fields.description,
             // author: req.user._id,
         };
-        let deteledImages =null;
+        let deteledImages = fields.deteledImages;
         if (deteledImages)
         try {
             deteledImages = JSON.parse(fields.deteledImages);;
