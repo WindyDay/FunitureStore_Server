@@ -9,6 +9,7 @@ var indexRouter = require('./routes/index');
 var passport = require('passport')
 var flash = require('connect-flash')
 var validator = require('express-validator')
+mongoose = require('mongoose').set('debug', true);
 
 var db = require('./models/db/db_connect');
 var route = require('./routes')

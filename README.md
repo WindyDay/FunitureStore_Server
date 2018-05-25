@@ -98,3 +98,15 @@ result:
     need userID and role in body
     PUT => http://localhost:9000/v1/api/user/role
 </code>
+
+<h4>Update a category: </h4>
+<code>
+    need _id and name(as new name) in body
+    PUT => http://localhost:9000/v1/api/categories
+</code>
+
+<h4>Delete a category: </h4>
+<code>
+    need _id in body
+    delete => http://localhost:9000/v1/api/categories
+</code>
