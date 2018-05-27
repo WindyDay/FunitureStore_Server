@@ -6,10 +6,32 @@
         <i class="fas fa-bars fa-lg active" id="toggle-dashboard"></i>
     </div>
     <div class="user-info ml-auto">
-        <i class="far fa-bell fa-lg mr-3"><span class="badge badge-primary">1</span></i>
-        <i class="fas fa-list fa-lg mr-3"><span class="badge badge-warning">1</span></i>
-        <i class="far fa-envelope-open fa-lg mr-3"><span class="badge badge-danger">1</span></i>
-        <img src="https://dummyimage.com/55x55/000/fff" alt="" class="avatar mr-3">
+        <i class="far fa-bell fa-lg mr-3">
+            <span class="badge badge-primary">1</span>
+        </i>
+        <i class="fas fa-list fa-lg mr-3">
+            <span class="badge badge-warning">1</span>
+        </i>
+        <i class="far fa-envelope-open fa-lg mr-3">
+            <span class="badge badge-danger">1</span>
+        </i>
+        {{#if user.avatarURL}}
+        <div class="loginInfo__manager">
+            <img src="{{user.avatarURL}}" alt="" class="loginInfo__avatar">
+            <ul class="loginInfo__list">
+                <li class="loginInfo__item text-left">
+                    {{user.fullName}}
+                </li>
+                <li class="loginInfo__item text-left">
+                    <a href="/">Trang chủ</a>
+                </li>
+                <li class="loginInfo__item text-left">
+                    <a href="/user/signout">Đăng xuất</a>
+                </li>
+            </ul>
+        </div>
+        {{else}}
+        <img src="/images/img_avatar1.png" alt="" class="loginInfo__avatar"> {{/if}}
     </div>
 </nav>
 <div class="admin-body">
@@ -18,8 +40,13 @@
             <h2 class="manager__title mt-3">Dashboard</h2>
             <ul class="manager__list">
                 <li class="manager__item active">
-                    <i class="far fa-user mr-2"></i><span>Tài khoản</span></li>
-                <li class="manager__item"><i class="fas fa-list-ul mr-2"></i><span>Sản phẩm</span></li>
+                    <i class="far fa-user mr-2"></i>
+                    <span>Tài khoản</span>
+                </li>
+                <li class="manager__item">
+                    <i class="fas fa-list-ul mr-2"></i>
+                    <span>Sản phẩm</span>
+                </li>
             </ul>
         </div>
     </aside>
@@ -72,12 +99,12 @@
                     <tbody>
                         {{#each products}}
                         <tr>
-                            <td><img src="{{this.thumbnail}}"/></td>
+                            <td>
+                                <img src="{{this.thumbnail}}" />
+                            </td>
                             <td>{{this.name}}</td>
                             <td>
-                                {{#each this.categories}}
-                                    {{this.name}},
-                                {{/each}}
+                                {{#each this.categories}} {{this.name}}, {{/each}}
                             </td>
                             <td>{{this.price}}</td>
                             <td>{{this.oldPrice}}</td>
@@ -102,7 +129,9 @@
 </div>
 <div class="modal" id="modal-edit">
     <div class="modalContent">
-        <div class="close-modal modalClose"><i class="fas fa-times fa-lg"></i></div>
+        <div class="close-modal modalClose">
+            <i class="fas fa-times fa-lg"></i>
+        </div>
         <h2 class="text-center">Sửa sản phẩm</h2>
         <div class="smallInfo">
             <div class="infoLabel">Tên sản phẩm</div>
@@ -134,7 +163,10 @@
             <input class="form-control avatarFileUpload" type="file">
         </div>
         <div class="smallInfo">
-            <div class="infoLabel">Ảnh sản phẩm<br><small>(Chọn ảnh muốn xóa)</small></div>
+            <div class="infoLabel">Ảnh sản phẩm
+                <br>
+                <small>(Chọn ảnh muốn xóa)</small>
+            </div>
             <div class="img-upload-container my-2">
                 {#
                 <div class="img-wrapper">
@@ -156,7 +188,9 @@
 </div>
 <div class="modal" id="modal">
     <div class="modalContent">
-        <div class="close-modal modalClose"><i class="fas fa-times fa-lg"></i></div>
+        <div class="close-modal modalClose">
+            <i class="fas fa-times fa-lg"></i>
+        </div>
         <h2 class="text-center">Thêm sản phẩm</h2>
         <div class="smallInfo">
             <div class="infoLabel">Tên sản phẩm</div>
@@ -192,7 +226,9 @@
 
 <div class="modal modal-account" id="modal-account">
     <div class="modalContent" id="updateRoleOverlay">
-        <div class="close-modal modalClose"><i class="fas fa-times fa-lg"></i></div>
+        <div class="close-modal modalClose">
+            <i class="fas fa-times fa-lg"></i>
+        </div>
         <h2 class="text-center">Phân quyền</h2>
         <div class="smallInfo">
             <div class="infoLabel">Email</div>

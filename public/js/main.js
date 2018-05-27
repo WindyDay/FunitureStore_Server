@@ -463,7 +463,7 @@ const STORE = {
     generateHTMLProduct: function (product) {
         const htmlProduct = `<div class="col-md-4 product">
                                 <figure>
-                                    <a href="detail.html">
+                                    <a href="/products/${product._id}">
                                         <img class="product__image" src="${product.thumbnail}" alt="">
                                     </a>
                                     <figcaption class="product__info text-center">
@@ -473,7 +473,7 @@ const STORE = {
                                     </figcaption>
                                 </figure>
                                 <div class="text-center">
-                                    <a href="detail.html" class="btn btn-2" id="${product._id}">MUA NGAY</a>
+                                    <a href="/products/${product._id}" class="btn btn-2" id="${product._id}">MUA NGAY</a>
                                 </div>
                             </div>`;
         $('.product-list>.row').append(htmlProduct);

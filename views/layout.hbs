@@ -82,8 +82,20 @@
                 </div>
                 <div class="login">
                     {{#if user}}
-                    <a href="/user/manager">Dashboard</a>/
-                    <a href="/user/signout">Đăng xuất</a>
+                    <div class="loginInfo">
+                        <span class="loginInfo__name">{{user.fullName}}</span>
+                        <div class="loginInfo__manager">
+                            {{#if user.avatarURL}}
+                            <img src="{{user.avatarURL}}" alt="" class="loginInfo__avatar">
+                            {{else}}
+                            <img src="/images/img_avatar1.png" alt="" class="loginInfo__avatar">
+                            {{/if}}
+                            <ul class="loginInfo__list">
+                                <li class="loginInfo__item text-left"><a href="/user/manager">Dashboard</a></li>
+                                <li class="loginInfo__item text-left"><a href="/user/signout">Đăng xuất</a></li>
+                            </ul>
+                        </div>
+                    </div>
                     {{else}}
                     <a href="/user/signin">Đăng nhập</a>/
                     <a href="/user/signup">Đăng ký</a>
