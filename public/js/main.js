@@ -51,7 +51,7 @@ const ADMIN = {
       $('#editAjax').data('id', idEdit);
       $.ajax({
         type: 'GET',
-        url: `http://localhost:9000/v1/api/products/${idEdit}`
+        url: `https://funiture-store.herokuapp.com/v1/api/products/${idEdit}`
       }).done(data => {
         // console.log(data)
         this.editProductEvent(data);
@@ -78,7 +78,7 @@ const ADMIN = {
         formData.append(key, data[key]);
       }
       $.ajax({
-        url: 'http://localhost:9000/v1/api/products',
+        url: 'https://funiture-store.herokuapp.com/v1/api/products',
         processData: false,
         contentType: false,
         type: 'PUT',
