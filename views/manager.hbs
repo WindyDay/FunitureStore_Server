@@ -1,6 +1,6 @@
 <nav class="admin-navbar row no-gutters">
     <div class="logo text-center">
-        <img src="/images/logo.png" alt="">
+        <img src="images/logo.png" alt="">
     </div>
     <div class="toggle-btn ml-5">
         <i class="fas fa-bars fa-lg active" id="toggle-dashboard"></i>
@@ -11,81 +11,57 @@
         <i class="far fa-envelope-open fa-lg mr-3"><span class="badge badge-danger">1</span></i>
         <img src="https://dummyimage.com/55x55/000/fff" alt="" class="avatar mr-3">
     </div>
-
 </nav>
 <div class="admin-body">
     <aside class="sidebar">
         <div class="manager">
             <h2 class="manager__title mt-3">Dashboard</h2>
             <ul class="manager__list">
-                <li class="manager__item active"><i class="far fa-user mr-2"></i>Tài khoản</li>
-                <li class="manager__item"><i class="fas fa-list-ul mr-2"></i>Sản phẩm</li>
+                <li class="manager__item active">
+                    <i class="far fa-user mr-2"></i><span>Tài khoản</span></li>
+                <li class="manager__item"><i class="fas fa-list-ul mr-2"></i><span>Sản phẩm</span></li>
             </ul>
         </div>
     </aside>
     <main class="main">
         <div class="main-content active pt-3" data-mapping="Tài khoản">
             <div class="mx-5">
-                <button class="btn btn-2 mb-3" id="addAccount">Thêm tài khoản</button>
-                <table class="table table-striped text-center account-table">
+                <button class="btn btn-2 mb-3" id="updateRole">Phân quyền</button>
+                <table class="table table-striped text-center account-table table-bordered">
                     <thead>
                         <tr>
-                            <th>Số thứ tự</th>
-                            <th>Tên tài khoản</th>
+                            <th>Email</th>
+                            <th>Họ tên</th>
+                            <th>Số điện thoại</th>
+                            <th>Ngày sinh</th>
                             <th>Ngày khởi tạo</th>
                             <th>Vai trò</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each users}}
                         <tr>
-                            <td>1</td>
-                            <td>tientranmac</td>
-                            <td>1/1/2018</td>
-                            <td>Quản trị viên</td>
-                            <td>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
+                            <td>{{this.email}}</td>
+                            <td>{{this.fullName}}</td>
+                            <td>{{this.phone}}</td>
+                            <td>{{this.birthday}}</td>
+                            <td>{{this.createdDate}}</td>
+                            <td>{{this.role}}</td>
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>tientranmac</td>
-                            <td>1/1/2018</td>
-                            <td>Cộng tác viên</td>
-                            <td>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>tientranmac</td>
-                            <td>1/1/2018</td>
-                            <td>Cộng tác viên</td>
-                            <td>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>tientranmac</td>
-                            <td>1/1/2018</td>
-                            <td>Cộng tác viên</td>
-                            <td>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="main-content  pt-3" data-mapping="Sản phẩm">
+        <div class="main-content pt-3" data-mapping="Sản phẩm">
             <div class="mx-5">
                 <button class="btn btn-2 mb-3" id="addProductBtn">Thêm sản phẩm</button>
-                <table class="table table-striped text-center product-table">
+                <table class="table table-striped text-center product-table table-bordered">
                     <thead>
                         <tr>
-                            <th>Tên sản phẩm</th>
-                            <th>Loại sản phẩm</th>
+                            <th>&nbsp;</th>
+                            <th>Sản phẩm</th>
+                            <th>Loại</th>
                             <th>Giá niêm yết</th>
                             <th>Giá cũ</th>
                             <th>Màu sắc</th>
@@ -94,134 +70,30 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each products}}
                         <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
+                            <td><img src="{{this.thumbnail}}"/></td>
+                            <td>{{this.name}}</td>
                             <td>
-                                <span class="color" style="background-color: red"></span>
+                                {{#each this.categories}}
+                                    {{this.name}},
+                                {{/each}}
                             </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
+                            <td>{{this.price}}</td>
+                            <td>{{this.oldPrice}}</td>
+                            <td>
+                                {{#each this.colors}}
+                                <span class="color" style="background-color: {{this.hex}}"></span>
+                                {{/each}}
+                            </td>
+                            <td class="description text-left">{{{this.description}}}
                             </td>
                             <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
+                                <button class="btn-admin btn-admin-edit" data-id="{{this._id}}">Sửa</button>
+                                <button class="btn-admin btn-admin-delete" data-id="{{this._id}}">Xóa</button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ghế lắc</td>
-                            <td>Ghế</td>
-                            <td>2.500.000</td>
-                            <td>3.000.000</td>
-                            <td>
-                                <span class="color" style="background-color: red"></span>
-                            </td>
-                            <td class="description text-left">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos dignissimos repudiandae officia corporis atque perspiciatis? Eos odio modi dicta sunt, aperiam eligendi soluta tempora laborum. Distinctio maiores odio incidunt
-                                temporibus.
-                            </td>
-                            <td>
-                                <button class="btn-admin btn-admin-edit">Sửa</button>
-                                <button class="btn-admin btn-admin-delete">Xóa</button>
-                            </td>
-                        </tr>
+                        {{/each}}
                     </tbody>
                 </table>
             </div>
@@ -234,31 +106,50 @@
         <h2 class="text-center">Sửa sản phẩm</h2>
         <div class="smallInfo">
             <div class="infoLabel">Tên sản phẩm</div>
-            <input class="form-control" type="text">
+            <input class="form-control prodNameInput" type="text">
+        </div>
+        <div class="smallInfo">
+            <div class="infoLabel">Loại sản phẩm</div>
+            <div class="categories-wrapper pl-4">
+                {{#each categories}}
+                <label class="form-check-label block">
+                    <input type="checkbox" class="form-check-input" value="{{this._id}}">{{this.name}}
+                </label>
+                {{/each}}
+            </div>
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Giá niêm yết</div>
-            <input class="form-control" type="text" placeholder="Giá bán ra">
+            <input class="form-control currPriceInput" type="text" placeholder="Giá bán ra">
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Giá cũ</div>
-            <input class="form-control" type="text" placeholder="Thành tiền khi chưa giảm giá">
+            <input class="form-control oldPriceInput" type="text" placeholder="Thành tiền khi chưa giảm giá">
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Hình đại diện</div>
-            <input class="form-control" type="file" id="thumnailFileUpload">
+            <div class="mb-2">
+                <img class="present-img" src="https://dummyimage.com/600x400/000/fff" alt="">
+            </div>
+            <input class="form-control avatarFileUpload" type="file">
         </div>
         <div class="smallInfo">
-            <div class="infoLabel">Ảnh sản phẩm</div>
-            <input class="form-control" type="file" id="thumnailFileUpload" multiple>
+            <div class="infoLabel">Ảnh sản phẩm<br><small>(Chọn ảnh muốn xóa)</small></div>
+            <div class="img-upload-container my-2">
+                {#
+                <div class="img-wrapper">
+                    <img src="https://dummyimage.com/600x400/000/fff" alt="">
+                </div> #}
+            </div>
+            <input class="form-control thumnailFileUpload" type="file" multiple>
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Mô tả</div>
-            <textarea class="form-control" rows="5" cols="40" id="descriptionEditor"></textarea>
+            <textarea class="form-control" rows="5" cols="40" class="descriptionEditor" id="abc"></textarea>
         </div>
 
         <div class="text-center btns">
-            <button class="btn btn-2 btn-width">Sửa</button>
+            <button class="btn btn-2 btn-width" id="editAjax" data-id="">Sửa</button>
             <button class="btn btn-danger btn-width close-modal">Hủy</button>
         </div>
     </div>
@@ -289,7 +180,7 @@
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Mô tả</div>
-            <textarea class="form-control" rows="5" cols="40" id="descriptionEditor"></textarea>
+            <textarea class="form-control descriptionEditor" rows="5" cols="40"></textarea>
         </div>
 
         <div class="text-center btns">
@@ -300,32 +191,25 @@
 </div>
 
 <div class="modal modal-account" id="modal-account">
-    <div class="modalContent">
+    <div class="modalContent" id="updateRoleOverlay">
         <div class="close-modal modalClose"><i class="fas fa-times fa-lg"></i></div>
-        <h2 class="text-center">Thêm tài khoản</h2>
+        <h2 class="text-center">Phân quyền</h2>
         <div class="smallInfo">
-            <div class="infoLabel">Tên tài khoản</div>
-            <input class="form-control" type="text">
-        </div>
-        <div class="smallInfo">
-            <div class="infoLabel">Mật khẩu</div>
-            <input class="form-control" type="password">
-        </div>
-        <div class="smallInfo">
-            <div class="infoLabel">Xác nhận mật khẩu</div>
-            <input class="form-control" type="password">
+            <div class="infoLabel">Email</div>
+            <input id="emailForRoleUpdate" name="email" class="form-control" type="email">
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Vai trò</div>
             <div class="select-wrapper">
-                <select name="" id="">
-                    <option value="">Quản trị viên</option>
-                    <option value="">Cộng tác viên</option>
+                <select id="roleForRoleUpdate" name="role" id="">
+                    <option value="user">User</option>
+                    <option value="mod">Mod</option>
+                    <option value="admin">Admin</option>
                 </select>
             </div>
         </div>
         <div class="text-center btns">
-            <button class="btn btn-2 btn-width">Thêm</button>
+            <button class="btn btn-2 btn-width" id="letsUpdateRole">Cập nhật</button>
             <button class="btn btn-danger btn-width close-modal">Hủy</button>
         </div>
     </div>

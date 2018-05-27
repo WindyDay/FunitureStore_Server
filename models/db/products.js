@@ -61,23 +61,29 @@ ProductSchema.statics = {
         let page = options.page || CONST.DEFAULT_PAGE
         let maxResults = options.maxResults || CONST.MAX_RESULTS
         let categories = options.categories || null
-        let colors = options.colors || null 
+        let colors = options.colors || null
         let minPrice = options.minPrice;
         let maxPrice = options.maxPrice;
-        let nameSort = options.nameSort*1;
-        let priceSort = options.priceSort*1;
+        let nameSort = options.nameSort * 1;
+        let priceSort = options.priceSort * 1;
         let searchKey = options.searchKey;
 
 
         let query = productsModel.find()
-        if(minPrice) query.where('price').gte(minPrice);
-        if(maxPrice) query.where('price').lte(maxPrice);
+        if (minPrice) query.where('price').gte(minPrice);
+        if (maxPrice) query.where('price').lte(maxPrice);
         query.skip((page - 1) * maxResults);
         query.limit(1 * maxResults);
         // console.log(nameSort);
-        if(nameSort) query.sort({name: nameSort})
-        if(priceSort) query.sort({price: priceSort})
-        if(searchKey) query.where({'name': new RegExp(searchKey,["i"])})
+        if (nameSort) query.sort({
+            name: nameSort
+        })
+        if (priceSort) query.sort({
+            price: priceSort
+        })
+        if (searchKey) query.where({
+            'name': new RegExp(searchKey, ["i"])
+        })
 
         let populateCategories = {
             path: 'categories',
@@ -91,7 +97,9 @@ ProductSchema.statics = {
             };
         }
 
-        let populateColors = {path: 'colors'}
+        let populateColors = {
+            path: 'colors'
+        }
         if (colors) {
             populateColors.match = {
                 'name': {
@@ -99,14 +107,14 @@ ProductSchema.statics = {
                 }
             };
         }
-        
+
         query.populate(populateCategories);
         query.populate(populateColors);
 
         query.select(select);
-        query.exec((err, productsResult) => {
-            let filteredResult = productsResult.filter(e => e.categories.length &&e.colors.length)
-            cb(err, filteredResult);
+        return query.exec((err, productsResult) => {
+            let filteredResult = productsResult.filter(e => e.categories.length && e.colors.length)
+            if (cb) cb(err, filteredResult);
         })
     },
 
