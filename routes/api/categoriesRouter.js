@@ -12,7 +12,7 @@ module.exports = router;
 
 function getAllCategories(req, res, next) {
     categoriesModel.getAll((err, result) => {
-        if (err) return next(err);
+        if (err) return res.status(400).send(err);
         res.send(result);
     })
 }
@@ -24,7 +24,7 @@ function editCategory(req, res, next) {
             name: req.body.name
         })
         .then(result => res.send(result))
-        .catch(err => res.send(err))
+        .catch(err => res.status(400).send(err))
 }
 
 function deleteCategory(req, res, next) {
@@ -32,7 +32,7 @@ function deleteCategory(req, res, next) {
             _id: req.body._id
         })
         .then(result => res.send(result))
-        .catch(err => res.send(err))
+        .catch(err => res.status(400).send(err))
 }
 
 function addCategory(req, res, next) {
@@ -40,5 +40,5 @@ function addCategory(req, res, next) {
             name: req.body.name
         })
         .then(result => res.send(result))
-        .catch(err => res.send(err))
+        .catch(err => res.status(400).send(err))
 }

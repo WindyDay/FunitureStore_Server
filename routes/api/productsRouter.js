@@ -44,14 +44,14 @@ function getProducts(req, res, next) {
     } else options.colors = null;
 
     productsModel.load(options, (err, productsResult) => {
-        if (err) return res.send(err);
+        if (err) return res.status(400).send(err);
         res.send(productsResult);
     })
 }
 
 function getProductById(req, res, next) {
     productsModel.getById(req.params.productId, (err, result) => {
-        if (err) return res.send(err);
+        if (err) return res.status(400).send(err);
         res.send(result);
     })
 }
@@ -64,8 +64,8 @@ function addProduct(req, res, next) {
 
 
     form.parse(req, (err, fields, files) => {
-        if (err) return res.send(err);
-        if (!req.user) return res.send('Need to login first')
+        if (err) return res.status(400).send(err);
+        if (!req.user) return res.status(400).send('Need to login first')
         let productInfo = {
             name: fields.name,
             oldPrice: fields.oldPrice,
@@ -76,7 +76,7 @@ function addProduct(req, res, next) {
         if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
         if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
         // console.log(fields);
-        if (!files.thumbnail || !files.images == undefined) return res.send('Did not upload enough images')
+        if (!files.thumbnail || !files.images == undefined) return res.status(400).send('Did not upload enough images')
 
         Array.isArray(files.thumbnail) ? productInfo.thumbnail = getRelativePath(files.thumbnail[0].path) : productInfo.thumbnail = getRelativePath(files.thumbnail.path);
         Array.isArray(files.images) ? productInfo.images = files.images.map(image => getRelativePath(image.path)) : productInfo.images = [getRelativePath(files.images.path)];
@@ -90,7 +90,7 @@ function addProduct(req, res, next) {
                 // console.log(result);
                 res.send(result);
             })
-            .catch(err => res.send(err));
+            .catch(err => res.status(400).send(err));
 
         // console.log(productInfo);
     });
@@ -114,7 +114,7 @@ function editProduct(req, res, next) {
 
     form.parse(req, (err, fields, files) => {
         // console.log(fields);
-        if (err) return res.send(err);
+        if (err) return res.status(400).send(err);
         // if (!req.user) return res.send('Need to login first')
 
         let productInfo = {
@@ -130,7 +130,7 @@ function editProduct(req, res, next) {
             deletedImages = JSON.parse(fields.deletedImages);;
         } catch (err) {
             console.log(err);
-            return res.send(err)
+            return res.status(400).send(err)
         }
         // console.log(deletedImages);
 
@@ -141,7 +141,7 @@ function editProduct(req, res, next) {
         // console.log('deletedImages.length='+deletedImages.length);
         if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
         // console.log(fields);
-        // if (!editedImagesList.length && !files.images) return res.send('Did not upload enough images')
+        // if (!editedImagesList.length && !files.images) return res.status(400).send('Did not upload enough images')
         if (files.thumbnail) {
             Array.isArray(files.thumbnail) ? productInfo.thumbnail = getRelativePath(files.thumbnail[0].path) : productInfo.thumbnail = getRelativePath(files.thumbnail.path);
         }
@@ -155,10 +155,10 @@ function editProduct(req, res, next) {
 
         // productInfo.images = editedImagesList;\♥
         productsModel.findById(fields.productID).lean().exec((err, result) => {
-            if (err) return res.send(err);
+            if (err) return res.status(400).send(err);
             oldImages = result.images;
             productInfo.images = [..._.difference(oldImages, deletedImages), ...newlyAddedImages];
-            if (!productInfo.images.length) return res.send('Did not upload enough images')
+            if (!productInfo.images.length) return res.status(400).send('Did not upload enough images')
 
             let query = {
                 _id: fields.productID
@@ -168,7 +168,7 @@ function editProduct(req, res, next) {
                     // console.log(result);
                     res.send(result);
                 })
-                .catch(err => res.send(err));
+                .catch(err => res.status(400).send(err));
 
         })
 
@@ -177,10 +177,10 @@ function editProduct(req, res, next) {
 }
 
 function deleteProduct(req, res, next) {
-    if (!req.body.productID) return res.send('Id not found')
+    if (!req.body.productID) return res.status(400).send('Id not found')
     productsModel.findOneAndRemove(req.body.productID)
         .then((result) => {
             res.send(result);
         })
-        .catch(err => res.send(err))
+        .catch(err => res.status(400).send(err))
 }

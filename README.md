@@ -90,7 +90,7 @@ result:
 <h4> Delete a product: </h4>
 <code>
     need productID in body
-    DELETE => http://localhost:9000/v1/api/product
+    DELETE => http://localhost:9000/v1/api/products
 </code>
 
 <h4>Update user role: </h4>
