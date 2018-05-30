@@ -213,18 +213,11 @@
         <div class="smallInfo">
             <div class="infoLabel">Loại sản phẩm</div>
             <div class="categories-wrapper pl-4">
+                {{#each categories}}
                 <label class="form-check-label block">
-                    <input type="checkbox" class="form-check-input" value="5b0a8a0678500e10a4393c97">Ghế
+                    <input type="checkbox" class="form-check-input" value="{{this._id}}">{{this.name}}
                 </label>
-                <label class="form-check-label block">
-                    <input type="checkbox" class="form-check-input" value="5b0a8a0678500e10a4393c96">Bàn
-                </label>
-                <label class="form-check-label block">
-                    <input type="checkbox" class="form-check-input" value="5b0a8a0778500e10a4393c98">Giường
-                </label>
-                <label class="form-check-label block">
-                    <input type="checkbox" class="form-check-input" value="5b0a8a0778500e10a4393c99 ">Sofa
-                </label>
+                {{/each}}
             </div>
         </div>
         <div class="smallInfo">
@@ -241,7 +234,7 @@
                 {{#each colors}}
                 <li class="color__item">
                     <label class="color__pick" data-id="{{this._id}}" style="background-color: {{this.hex}}">
-                        <input type="checkbox" name="color_editProduct" class="color_editProduct">
+                        <input type="checkbox" name="color_addProduct" class="color_editProduct">
                         <span class="color__check"></span>
                     </label>
                 </li>
