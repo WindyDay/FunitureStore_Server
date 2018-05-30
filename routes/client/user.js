@@ -3,6 +3,7 @@ var router = express.Router();
 var usersModel = require('../../models/db/users')
 var productsModel = require('../../models/db/products')
 var categoriesModel = require('../../models/db/categories')
+var colorsModel = require('../../models/db/colors')
 
 
 router.get('/SignIn', renderSignIn);
@@ -31,13 +32,9 @@ function signOut(req, res, next) {
 }
 
 async function manager(req, res, next) {
-  let users;
-  let products;
-  let categories;
   getAllUsers = new Promise((resolve, reject) => {
     usersModel.find((err, res) => {
       if (err) reject(err);
-      users = res;
       resolve(res);
     })
   });
@@ -45,7 +42,6 @@ async function manager(req, res, next) {
   getAllProducts = new Promise((resolve, reject) => {
     productsModel.load({select: 'name price oldPrice thumbnail colors categories description'},(err, res) => {
       if (err) reject(err);
-      products = res;
       resolve(res);
     })
   });
@@ -53,21 +49,26 @@ async function manager(req, res, next) {
   getAllCategories = new Promise((resolve, reject) => {
     categoriesModel.getAll((err, res) => {
       if (err) reject(err);
-      categories = res;
+      resolve(res);
+    })
+  });
+  getAllColors = new Promise((resolve, reject) => {
+    colorsModel.getAll((err, res) => {
+      if (err) reject(err);
       resolve(res);
     })
   });
 
 
 
-  await Promise.all([getAllUsers, getAllProducts, getAllCategories])
+  await Promise.all([getAllUsers, getAllProducts, getAllCategories, getAllColors])
     .then(results => {
-      console.log(products[0])
       res.render('manager', {
         layout: 'managerLayout',
-        users: users,
-        products: products,
-        categories: categories
+        users: results[0],
+        products: results[1],
+        categories: results[2],
+        colors: results[3]
       })
     })
     .catch(err => next(err))

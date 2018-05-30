@@ -1,6 +1,6 @@
 <nav class="admin-navbar row no-gutters">
     <div class="logo text-center">
-        <img src="images/logo.png" alt="">
+        <img src="/images/logo.png" alt="">
     </div>
     <div class="toggle-btn ml-5">
         <i class="fas fa-bars fa-lg active" id="toggle-dashboard"></i>
@@ -156,6 +156,19 @@
             <input class="form-control oldPriceInput" type="text" placeholder="Thành tiền khi chưa giảm giá">
         </div>
         <div class="smallInfo">
+            <div class="infoLabel">Màu sắc</div>
+            <ul class="color">
+                {{#each colors}}
+                <li class="color__item">
+                    <label class="color__pick" data-id="{{this._id}}" style="background-color: {{this.hex}}">
+                        <input type="checkbox" name="color_editProduct" class="color_editProduct">
+                        <span class="color__check"></span>
+                    </label>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="smallInfo">
             <div class="infoLabel">Hình đại diện</div>
             <div class="mb-2">
                 <img class="present-img" src="https://dummyimage.com/600x400/000/fff" alt="">
@@ -194,23 +207,54 @@
         <h2 class="text-center">Thêm sản phẩm</h2>
         <div class="smallInfo">
             <div class="infoLabel">Tên sản phẩm</div>
-            <input class="form-control" type="text">
+            <input class="form-control prodNameInput" type="text">
+        </div>
+
+        <div class="smallInfo">
+            <div class="infoLabel">Loại sản phẩm</div>
+            <div class="categories-wrapper pl-4">
+                <label class="form-check-label block">
+                    <input type="checkbox" class="form-check-input" value="5b0a8a0678500e10a4393c97">Ghế
+                </label>
+                <label class="form-check-label block">
+                    <input type="checkbox" class="form-check-input" value="5b0a8a0678500e10a4393c96">Bàn
+                </label>
+                <label class="form-check-label block">
+                    <input type="checkbox" class="form-check-input" value="5b0a8a0778500e10a4393c98">Giường
+                </label>
+                <label class="form-check-label block">
+                    <input type="checkbox" class="form-check-input" value="5b0a8a0778500e10a4393c99 ">Sofa
+                </label>
+            </div>
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Giá niêm yết</div>
-            <input class="form-control" type="text" placeholder="Giá bán ra">
+            <input class="form-control currPriceInput" type="text" placeholder="Giá bán ra">
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Giá cũ</div>
-            <input class="form-control" type="text" placeholder="Thành tiền khi chưa giảm giá">
+            <input class="form-control oldPriceInput" type="text" placeholder="Thành tiền khi chưa giảm giá">
+        </div>
+        <div class="smallInfo">
+            <div class="infoLabel">Màu sắc</div>
+            <ul class="color">
+                {{#each colors}}
+                <li class="color__item">
+                    <label class="color__pick" data-id="{{this._id}}" style="background-color: {{this.hex}}">
+                        <input type="checkbox" name="color_editProduct" class="color_editProduct">
+                        <span class="color__check"></span>
+                    </label>
+                </li>
+                {{/each}}
+            </ul>
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Hình đại diện</div>
-            <input class="form-control" type="file" id="thumnailFileUpload">
+            <input class="form-control add_thumnailUpload" type="file" id="thumnailFileUpload">
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Ảnh sản phẩm</div>
-            <input class="form-control" type="file" id="thumnailFileUpload" multiple>
+            <input class="form-control add_imagesUpload" type="file" id="thumnailFileUpload" multiple>
         </div>
         <div class="smallInfo">
             <div class="infoLabel">Mô tả</div>
@@ -218,7 +262,7 @@
         </div>
 
         <div class="text-center btns">
-            <button class="btn btn-2 btn-width">Thêm</button>
+            <button class="btn btn-2 btn-width" id="letsAddAProduct">Thêm</button>
             <button class="btn btn-danger btn-width close-modal">Hủy</button>
         </div>
     </div>

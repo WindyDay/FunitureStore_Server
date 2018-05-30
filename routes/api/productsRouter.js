@@ -73,8 +73,27 @@ function addProduct(req, res, next) {
             description: fields.description,
             author: req.user._id,
         };
-        if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
-        if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
+        let deletedImages = fields.deletedImages;
+        let categories = fields.categories;
+        let colors = fields.colors;
+        try {
+            if (categories)
+                categories = JSON.parse(fields.categories);
+            if (colors)
+                colors = JSON.parse(fields.colors);
+                
+
+        } catch (err) {
+            console.log(err);
+            return res.status(400).send(err)
+        }
+        
+        if (categories) categories = _.flatten([categories]);
+        if (colors) colors = _.flatten([colors]);
+
+        productInfo.colors = colors;
+        productInfo.categories = categories;
+        
         // console.log(fields);
         if (!files.thumbnail || !files.images == undefined) return res.status(400).send('Did not upload enough images')
 
@@ -113,7 +132,6 @@ function editProduct(req, res, next) {
 
 
     form.parse(req, (err, fields, files) => {
-        // console.log(fields);
         if (err) return res.status(400).send(err);
         // if (!req.user) return res.send('Need to login first')
 
@@ -125,9 +143,16 @@ function editProduct(req, res, next) {
             // author: req.user._id,
         };
         let deletedImages = fields.deletedImages;
-        if (deletedImages)
+        let categories = fields.categories;
+        let colors = fields.colors;
         try {
-            deletedImages = JSON.parse(fields.deletedImages);;
+            if (deletedImages)
+                deletedImages = JSON.parse(fields.deletedImages);
+            if (categories)
+                categories = JSON.parse(fields.categories);
+            if (colors)
+                colors = JSON.parse(fields.colors);
+
         } catch (err) {
             console.log(err);
             return res.status(400).send(err)
@@ -136,10 +161,10 @@ function editProduct(req, res, next) {
 
         let oldImages = null;
         let newlyAddedImages = [];
-        if (fields.categories) productInfo.categories = _.flatten([fields.categories]);
+        if (categories) categories = _.flatten([categories]);
         if (deletedImages) deletedImages = _.flatten([deletedImages]);
         // console.log('deletedImages.length='+deletedImages.length);
-        if (fields.colors) productInfo.colors = _.flatten([fields.colors]);
+        if (colors) colors = _.flatten([colors]);
         // console.log(fields);
         // if (!editedImagesList.length && !files.images) return res.status(400).send('Did not upload enough images')
         if (files.thumbnail) {
@@ -158,8 +183,11 @@ function editProduct(req, res, next) {
             if (err) return res.status(400).send(err);
             oldImages = result.images;
             productInfo.images = [..._.difference(oldImages, deletedImages), ...newlyAddedImages];
+            productInfo.colors = colors;
+            productInfo.categories = categories;
             if (!productInfo.images.length) return res.status(400).send('Did not upload enough images')
 
+            console.log(productInfo);
             let query = {
                 _id: fields.productID
             }
@@ -168,7 +196,9 @@ function editProduct(req, res, next) {
                     // console.log(result);
                     res.send(result);
                 })
-                .catch(err => res.status(400).send(err));
+                .catch(err => {
+                    console.log(err);
+                    res.status(400).send(err)});
 
         })
 
