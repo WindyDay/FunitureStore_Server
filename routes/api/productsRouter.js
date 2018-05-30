@@ -209,7 +209,7 @@ function editProduct(req, res, next) {
 
 function deleteProduct(req, res, next) {
     if (!req.body.productID) return res.status(400).send('Id not found')
-    productsModel.findOneAndRemove(req.body.productID)
+    productsModel.findOneAndRemove({_id:req.body.productID})
         .then((result) => {
             res.send(result);
         })
