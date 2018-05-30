@@ -65,14 +65,14 @@ function addProduct(req, res, next) {
 
     form.parse(req, (err, fields, files) => {
         if (err) return res.status(400).send(err);
-        // if (!req.user) return res.status(400).send('Need to login first')
+        if (!req.user) return res.status(400).send('Need to login first')
         let productInfo = {
             name: fields.name,
             oldPrice: fields.oldPrice,
             price: fields.price,
             description: fields.description,
-            author: "5b0c3eb5bfe98174f488b9e7",
-            // author: req.user._id,
+            // author: "5b0c3eb5bfe98174f488b9e7",
+            author: req.user._id,
         };
         let deletedImages = fields.deletedImages;
         let categories = fields.categories;
@@ -188,7 +188,7 @@ function editProduct(req, res, next) {
             productInfo.categories = categories;
             if (!productInfo.images.length) return res.status(400).send('Did not upload enough images')
 
-            console.log(productInfo);
+            // console.log(productInfo);
             let query = {
                 _id: fields.productID
             }
