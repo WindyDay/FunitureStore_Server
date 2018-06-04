@@ -1,3 +1,4 @@
 /node_modules
 yarn-error.log
-/public/upload/*.png
+/public/upload/*
+/public/upload/!to make sure git upload this folder
