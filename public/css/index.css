@@ -252,11 +252,6 @@
                 animation: fadeIn 1s ease; }
         .page-admin .admin-body .main .main-content.active {
           display: block; }
-  .page-admin .color {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%; }
   .page-admin .btn-admin {
     border: none;
     cursor: pointer;
@@ -759,7 +754,7 @@
 
 .color__pick {
   cursor: pointer;
-  display: inline-block;
+  display: block;
   width: 30px;
   height: 30px;
   border-radius: 50%;

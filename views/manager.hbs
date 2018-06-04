@@ -47,13 +47,18 @@
                     <i class="fas fa-list-ul mr-2"></i>
                     <span>Sản phẩm</span>
                 </li>
+
+                <li class="manager__item">
+                    <i class="fas fa-tags mr-2"></i>
+                    <span>Loại sản phẩm</span>
+                </li>
             </ul>
         </div>
     </aside>
     <main class="main">
         <div class="main-content active pt-3" data-mapping="Tài khoản">
             <div class="mx-5">
-                <button class="btn btn-2 mb-3" id="updateRole">Phân quyền</button>
+                <button class="btn btn-2 mb-3 openPopup" id="updateRole" data-popup="#modal-account">Phân quyền</button>
                 <table class="table table-striped text-center account-table table-bordered">
                     <thead>
                         <tr>
@@ -82,7 +87,7 @@
         </div>
         <div class="main-content pt-3" data-mapping="Sản phẩm">
             <div class="mx-5">
-                <button class="btn btn-2 mb-3" id="addProductBtn">Thêm sản phẩm</button>
+                <button class="btn btn-2 mb-3 openPopup" data-popup="#modal">Thêm sản phẩm</button>
                 <table class="table table-striped text-center product-table table-bordered">
                     <thead>
                         <tr>
@@ -121,6 +126,22 @@
                             </td>
                         </tr>
                         {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="main-content pt-3" data-mapping="Loại sản phẩm">
+            <div class="mx-5">
+                <div class="my-3">
+                    <button class="btn btn-2 btnAddCategory openPopup" data-popup="#modalAddCategory">Thêm</button>
+                </div>
+                <table class="table table-striped text-center categories-table table-bordered">
+                    <thead>
+                        <th>STT</th>
+                        <th>Loại sản phẩm</th>
+                        <th>&nbsp;</th>
+                    </thead>
+                    <tbody>
                     </tbody>
                 </table>
             </div>
@@ -283,6 +304,38 @@
         </div>
         <div class="text-center btns">
             <button class="btn btn-2 btn-width" id="letsUpdateRole">Cập nhật</button>
+            <button class="btn btn-danger btn-width close-modal">Hủy</button>
+        </div>
+    </div>
+</div>
+<div class="modal modal-account" id="modalAddCategory">
+    <div class="modalContent">
+        <div class="close-modal modalClose">
+            <i class="fas fa-times fa-lg"></i>
+        </div>
+        <h2 class="text-center">Thêm loại sản phẩm</h2>
+        <div class="smallInfo">
+            <div class="infoLabel">Loại sản phẩm</div>
+            <input id="input-category" name="category" class="form-control" type="text">
+        </div>
+        <div class="text-center btns">
+            <button class="btn btn-2 btn-width" id="letsAddCategory">Thêm</button>
+            <button class="btn btn-danger btn-width close-modal">Hủy</button>
+        </div>
+    </div>
+</div>
+<div class="modal modal-account" id="modalEditCategory">
+    <div class="modalContent">
+        <div class="close-modal modalClose">
+            <i class="fas fa-times fa-lg"></i>
+        </div>
+        <h2 class="text-center">Sửa loại sản phẩm</h2>
+        <div class="smallInfo">
+            <div class="infoLabel">Loại sản phẩm</div>
+            <input id="input-category-edit" name="category" class="form-control" type="text">
+        </div>
+        <div class="text-center btns">
+            <button class="btn btn-2 btn-width" id="letsEditCategory">Sửa</button>
             <button class="btn btn-danger btn-width close-modal">Hủy</button>
         </div>
     </div>
