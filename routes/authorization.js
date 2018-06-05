@@ -1,7 +1,6 @@
 function requireLogin  (req, res, next)  {
     if (req.isAuthenticated()) return next();
-    req.flash('err_msg', "You need to login first!")
-    res.redirect('/user/SignIn');
+    res.status(403).send({msg: "You are not authorized, need login first"})
 }
 
 function hasAdminPermission  (req, res, next)  {
