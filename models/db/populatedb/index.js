@@ -45,9 +45,7 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
     userDetail = {
         email: email,
         password: md5(password),
-        fullName: fullName,
         phone: phone,
-        avatarURL: avatarURL,
     }
     if (fullName != false) 
         userDetail.fullName = fullName;
