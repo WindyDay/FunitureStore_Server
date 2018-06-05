@@ -5,12 +5,13 @@ const _ = require('lodash')
 const CONST = require('../../constants');
 const formidable = require('formidable')
 const path = require('path')
+const auth = require('../authorization');
 
 router.get('/', getProducts);
 router.get('/:productId', getProductById);
-router.post('/', addProduct);
-router.put('/', editProduct);
-router.delete('/', deleteProduct);
+router.post('/', auth.ModAuthorized, addProduct);
+router.put('/', auth.ModAuthorized, editProduct);
+router.delete('/', auth.AdminAuthorized, deleteProduct);
 
 
 module.exports = router;

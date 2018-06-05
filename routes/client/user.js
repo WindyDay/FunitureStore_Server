@@ -4,12 +4,13 @@ var usersModel = require('../../models/db/users')
 var productsModel = require('../../models/db/products')
 var categoriesModel = require('../../models/db/categories')
 var colorsModel = require('../../models/db/colors')
+const auth = require('../authorization');
 
 
 router.get('/SignIn', renderSignIn);
 router.get('/SignUp', renderSignUp);
 router.get('/SignOut', signOut);
-router.get('/manager', manager);
+router.get('/manager', auth.ModAuthorized, manager);
 
 
 module.exports = router;
@@ -32,6 +33,7 @@ function signOut(req, res, next) {
 }
 
 async function manager(req, res, next) {
+  console.log(req.user)
   getAllUsers = new Promise((resolve, reject) => {
     usersModel.find((err, res) => {
       if (err) reject(err);

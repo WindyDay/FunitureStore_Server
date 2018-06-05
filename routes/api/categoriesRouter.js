@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const categoriesModel = require('../../models/db/categories')
+const auth = require('../authorization');
 
 router.get('/', getAllCategories);
-router.post('/', addCategory);
-router.put('/', editCategory);
-router.delete('/', deleteCategory);
+router.post('/', auth.ModAuthorized, addCategory);
+router.put('/', auth.ModAuthorized, editCategory);
+router.delete('/', auth.AdminAuthorized, deleteCategory);
 
 
 module.exports = router;
