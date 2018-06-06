@@ -108,5 +108,10 @@ result:
 <h4>Delete a category: </h4>
 <code>
     need _id in body
-    delete => http://localhost:9000/v1/api/categories
+    DELETE => http://localhost:9000/v1/api/categories
+</code>
+
+<h4>Verify an account: </h4>
+<code>
+    GET => http://localhost:9000/v1/api/user/verify/:email/:verifyCode
 </code>
