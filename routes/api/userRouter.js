@@ -5,7 +5,8 @@ const _ = require('lodash')
 const md5 = require('md5');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
-
+const crypto = require('crypto')
+const mailer = require('../mailer')
 
 router.post('/SignUp', signUp);
 
@@ -39,6 +40,8 @@ function signUp(req, res, next) {
         return res.redirect('/user/signup')
     }
 
+    
+    let verifyCode = crypto.randomBytes(20).toString('hex');
     let userInfo = {
         email: req.body.email,
         password: md5(req.body.password),
@@ -47,8 +50,10 @@ function signUp(req, res, next) {
         avatarURL: req.body.avatarURL,
         birthday: req.body.birthday,
         createdDate: req.body.createdDate,
+        verifyCode: md5(verifyCode)
     }
-
+    console.log('verifyCode:' + verifyCode);
+    
     for (key in userInfo) {
         if (!userInfo[key]) {
             delete userInfo[key]
@@ -57,6 +62,7 @@ function signUp(req, res, next) {
 
     usersModel.create(userInfo)
         .then(result => {
+            mailer.sendMail(mailer.createVerifyMail(result.email,verifyCode))
             req.flash('success_msg', 'Now you can login')
             return res.redirect('/user/signin')
         })

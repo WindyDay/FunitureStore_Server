@@ -5,6 +5,7 @@ var productsModel = require('../../models/db/products')
 var categoriesModel = require('../../models/db/categories')
 var colorsModel = require('../../models/db/colors')
 const auth = require('../authorization');
+const os = require('os')
 
 
 router.get('/SignIn', renderSignIn);
@@ -18,7 +19,7 @@ module.exports = router;
 
 
 function renderSignIn(req, res, next) {
-  require('../mailer')
+  console.log(express().get('hostname'))
   res.render('signin');
 }
 
