@@ -41,7 +41,7 @@ var _categories = []
 var _colors = []
 
 //Create one object
-function userCreate(email, password, fullName, phone, avatarURL, birthday, createdDate, role, cb) {
+function userCreate(email, password, fullName, phone, avatarURL, birthday, createdDate, role, status, verifyCode, cb) {
     userDetail = {
         email: email,
         password: md5(password),
@@ -57,6 +57,10 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
         userDetail.birthday = birthday;
     if (role != false) 
         userDetail.role = role;
+    if (status != false) 
+        userDetail.status = status;
+    if (verifyCode != false) 
+        userDetail.verifyCode = md5(verifyCode);
     
     var user = new User(userDetail);
 
@@ -154,20 +158,20 @@ function createUsers(cb) {
         function (callback) {
             userCreate('001.icetea@gmail.com', '123456', 'Toi La Admin', '01668313970', 'https://media.mnn.com/assets/images/2018/02/AdorableBlackCatLookingAtCameraFromS' +
                     'ofa.jpg.653x0_q80_crop-smart.jpg',
-            '1996-08-04', '2018-05-02', 'admin', callback);
+            '1996-08-04', '2018-05-02', 'admin', 'verified', false, callback);
         },
         function (callback) {
-            userCreate('icecrystal196@gmail.com', '123456', false, '01234567899', false, false, false, false, callback);
+            userCreate('icecrystal196@gmail.com', '123456', false, '01234567899', false, false, false, false, 'verified', false,  callback);
         },
         function (callback) {
             userCreate('balabolo@gmail.com', '123456', 'Asimov', '01668313970', 'https://media.mnn.com/assets/images/2018/02/AdorableBlackCatLookingAtCameraFromS' +
                     'ofa.jpg.653x0_q80_crop-smart.jpg',
-            false, false, false, callback);
+            false, false, false, false, '123456',callback);
         },
         function (callback) {
             userCreate('002.icetea@gmail.com', '123456', 'I\'m mod', '01668313970', 'https://media.mnn.com/assets/images/2018/02/AdorableBlackCatLookingAtCameraFromS' +
                     'ofa.jpg.653x0_q80_crop-smart.jpg',
-            false, false, 'mod', callback);
+            false, false, 'mod', 'verified', false,callback);
         },
     ],
     // optional callback

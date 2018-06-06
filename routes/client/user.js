@@ -18,6 +18,7 @@ module.exports = router;
 
 
 function renderSignIn(req, res, next) {
+  require('../mailer')
   res.render('signin');
 }
 

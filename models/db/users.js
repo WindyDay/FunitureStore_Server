@@ -42,7 +42,16 @@ var UserSchema = new Schema({
         required: [true, 'Missing user\'s role!'],
         enum: ['admin', 'mod', 'user'],
         default: 'user',  
-    }
+    },
+    status: {
+        type: String,
+        required: [true, 'Missing user\'s status!'],
+        enum: ['unverified', 'verified', 'block'],
+        default: 'unverified',  
+    },
+    verifyCode: {
+        type: String,
+    },
 });
 UserSchema.statics ={
     matchPassword : (pass1, pass2)=>{

@@ -21,6 +21,7 @@ router.post('/SignIn', standardizeEmail, passport.authenticate('local', {
 
 router.put('/role', updateRole)
 
+router.get('/verify/:email/:verifyCode', verifyAccount)
 module.exports = router;
 
 
@@ -82,4 +83,18 @@ function updateRole(req, res, next){
     })
     .catch(err=>next(err));
     
+}
+
+function verifyAccount(req, res, next){
+    usersModel.findOne({email: req.params.email}).exec()
+    .then((result)=>{
+        if(result.status === 'unverified' && result.verifyCode === md5(req.params.verifyCode)){
+            result.status='verified';
+            result.verifyCode= undefined;
+            result.save();
+            return res.send('Your account has been verified, you can login now')
+        }
+        return res.status(404).send('Some thing went wrong')
+    })
+    .catch(err=>res.status(404).send('Account not exist'))
 }
