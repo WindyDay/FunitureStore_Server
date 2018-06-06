@@ -63,7 +63,7 @@ function signUp(req, res, next) {
     usersModel.create(userInfo)
         .then(result => {
             mailer.sendMail(mailer.createVerifyMail(result.email,verifyCode))
-            req.flash('success_msg', 'Now you can login')
+            req.flash('success_msg', 'Please check your email to verify account, then you can login')
             return res.redirect('/user/signin')
         })
         .catch(err => {

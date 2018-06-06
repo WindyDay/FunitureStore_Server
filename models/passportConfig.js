@@ -21,6 +21,12 @@ module.exports = function(passport){
               message: 'Incorrect email.'
             });
           }
+          if (user.status !== 'verified') {
+            // console.log('Incorrect password');
+            return done(null, false, {
+              message: 'Your account is not verified.'
+            });
+          }
           if (!usersModel.matchPassword(user.password, md5(password))) {
             // console.log('Incorrect password');
             return done(null, false, {

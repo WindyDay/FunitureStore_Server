@@ -10,6 +10,7 @@ const {ONL_API_PATH, LOCAL_API_PATH} = require('../constants')
 exports.createVerifyMail = (to, verifyCode) => {
     let message = {
         // Comma separated list of recipients
+        from: 'FunitureOnlineShop <icecrystal196@gmail.com>',
         to: to,
 
         // Subject of the message
@@ -17,7 +18,7 @@ exports.createVerifyMail = (to, verifyCode) => {
 
         // HTML body
         html: `
-        <p>Please <b><a href="${LOCAL_API_PATH}/user/verify/${to}/${verifyCode}">CLICK HERE</a></b> to verify your account:</p>
+        <p>Please <b><a href="${ONL_API_PATH}/user/verify/${to}/${verifyCode}">CLICK HERE</a></b> to verify your account:</p>
         
         `
     };

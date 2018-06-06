@@ -19,7 +19,6 @@ module.exports = router;
 
 
 function renderSignIn(req, res, next) {
-  console.log(express().get('hostname'))
   res.render('signin');
 }
 
