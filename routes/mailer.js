@@ -1,7 +1,8 @@
 const nodemailer = require('nodemailer');
 const {
     ONL_API_PATH,
-    LOCAL_API_PATH
+    LOCAL_API_PATH,
+    ONL_PATH
 } = require('../constants')
 
 // NB! Store the account object values somewhere if you want
@@ -21,7 +22,7 @@ exports.createVerifyMail = (to, verifyToken) => {
 
         // HTML body
         html: `
-        <p>Please <b><a href="${LOCAL_API_PATH}/user/verify/${to}/${verifyToken}">CLICK HERE</a></b> to verify your account:</p>
+        <p>Please <b><a href="${ONL_API_PATH}/user/verify/${to}/${verifyToken}">CLICK HERE</a></b> to verify your account:</p>
         
         `
     };
@@ -38,7 +39,7 @@ exports.createResetPassMail = (to, resetToken) => {
 
         // HTML body
         html: `
-        <p>Please <b><a href="${LOCAL_API_PATH}/user/resetPassword/${to}/${resetToken}">CLICK HERE</a></b> to reset your password:</p>
+        <p>Please <b><a href="${ONL_PATH}/user/resetPassword/${to}/${resetToken}">CLICK HERE</a></b> to reset your password:</p>
         
         `
     };
