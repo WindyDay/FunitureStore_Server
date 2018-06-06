@@ -41,7 +41,7 @@ var _categories = []
 var _colors = []
 
 //Create one object
-function userCreate(email, password, fullName, phone, avatarURL, birthday, createdDate, role, status, verifyCode, cb) {
+function userCreate(email, password, fullName, phone, avatarURL, birthday, createdDate, role, status, verifyToken, cb) {
     userDetail = {
         email: email,
         password: md5(password),
@@ -59,8 +59,8 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
         userDetail.role = role;
     if (status != false) 
         userDetail.status = status;
-    if (verifyCode != false) 
-        userDetail.verifyCode = md5(verifyCode);
+    if (verifyToken != false) 
+        userDetail.verifyToken = md5(verifyToken);
     
     var user = new User(userDetail);
 

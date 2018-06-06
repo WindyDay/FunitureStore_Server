@@ -11,6 +11,8 @@ const os = require('os')
 router.get('/SignIn', renderSignIn);
 router.get('/SignUp', renderSignUp);
 router.get('/SignOut', signOut);
+router.get('/forgetPassword', forgetPassword);
+router.get('/resetPassword/:email/:resetToken', resetPassword);
 router.get('/manager', auth.ModAuthorized, manager);
 
 
@@ -33,7 +35,7 @@ function signOut(req, res, next) {
   res.redirect('/user/SignIn');
 }
 
-async function manager(req, res, next) {
+function manager(req, res, next) {
   console.log(req.user)
   getAllUsers = new Promise((resolve, reject) => {
     usersModel.find((err, res) => {
@@ -64,7 +66,7 @@ async function manager(req, res, next) {
 
 
 
-  await Promise.all([getAllUsers, getAllProducts, getAllCategories, getAllColors])
+  Promise.all([getAllUsers, getAllProducts, getAllCategories, getAllColors])
     .then(results => {
       res.render('manager', {
         layout: 'managerLayout',
@@ -76,4 +78,11 @@ async function manager(req, res, next) {
     })
     .catch(err => next(err))
 
+}
+
+function resetPassword(req, res, next){
+  res.render('resetPassword', {email:req.params.email, resetToken: req.params.resetToken});
+}
+function forgetPassword(req, res, next){
+  res.render('forgetPassword');
 }

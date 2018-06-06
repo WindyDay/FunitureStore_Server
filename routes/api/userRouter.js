@@ -15,14 +15,15 @@ router.post('/SignIn', standardizeEmail, passport.authenticate('local', {
     failureRedirect: '/user/SignIn',
     failureFlash: true
 }), (req, res, next)=>{
-    // req.flash('success_msg', 'Logged in')
     res.redirect('/')
 }
 );
 
 router.put('/role', updateRole)
 
-router.get('/verify/:email/:verifyCode', verifyAccount)
+router.get('/verify/:email/:verifyToken', verifyAccount)
+router.post('/forgetPassword', forgetPassword)
+router.post('/resetPassword', resetPassword)
 module.exports = router;
 
 
@@ -41,7 +42,7 @@ function signUp(req, res, next) {
     }
 
     
-    let verifyCode = crypto.randomBytes(20).toString('hex');
+    let verifyToken = crypto.randomBytes(20).toString('hex');
     let userInfo = {
         email: req.body.email,
         password: md5(req.body.password),
@@ -50,9 +51,8 @@ function signUp(req, res, next) {
         avatarURL: req.body.avatarURL,
         birthday: req.body.birthday,
         createdDate: req.body.createdDate,
-        verifyCode: md5(verifyCode)
+        verifyToken: md5(verifyToken)
     }
-    console.log('verifyCode:' + verifyCode);
     
     for (key in userInfo) {
         if (!userInfo[key]) {
@@ -62,7 +62,7 @@ function signUp(req, res, next) {
 
     usersModel.create(userInfo)
         .then(result => {
-            mailer.sendMail(mailer.createVerifyMail(result.email,verifyCode))
+            mailer.sendMail(mailer.createVerifyMail(result.email,verifyToken))
             req.flash('success_msg', 'Please check your email to verify account, then you can login')
             return res.redirect('/user/signin')
         })
@@ -94,13 +94,53 @@ function updateRole(req, res, next){
 function verifyAccount(req, res, next){
     usersModel.findOne({email: req.params.email}).exec()
     .then((result)=>{
-        if(result.status === 'unverified' && result.verifyCode === md5(req.params.verifyCode)){
+        if(result.status === 'unverified' && result.verifyToken === md5(req.params.verifyToken)){
             result.status='verified';
-            result.verifyCode= undefined;
+            result.verifyToken= undefined;
             result.save();
             return res.send('Your account has been verified, you can login now')
         }
         return res.status(404).send('Some thing went wrong')
     })
-    .catch(err=>res.status(404).send('Account not exist'))
+    .catch(err=>res.status(404).send(`Account ${email} not exist`))
+}
+
+function forgetPassword(req, res, next) {
+    req.checkBody('email', 'Email is required').notEmpty();
+    req.checkBody('email', 'Email is invalid').isEmail();
+
+    const errors = req.validationErrors();
+    if (errors) {
+        req.flash('err_msg', _.first(errors).msg)
+        return res.redirect('/user/forgetPassword')
+    }
+
+    
+    let resetToken = crypto.randomBytes(20).toString('hex');
+    usersModel.findOneAndUpdate({email:req.body.email}, {resetToken: md5(resetToken)})
+    .then(result=>{
+        mailer.sendMail(mailer.createResetPassMail(result.email,resetToken))
+        req.flash('success_msg', 'Please check your email to reset your password')
+        return res.redirect('/user/signin')
+    })
+    .catch(err => {
+        req.flash('err_msg', 'Email not found!')
+        return res.redirect('/user/forgetPassword')
+    })
+}
+
+function resetPassword(req, res, next) {
+    usersModel.findOne({email: req.body.email}).exec()
+    .then((result)=>{
+        if(req.body.password !== req.body.password2) 
+            return res.status(404).send('Password not match')
+        if(result.resetToken === md5(req.body.resetToken)){
+            result.resetToken= undefined;
+            result.password= md5(req.body.password);
+            result.save();
+            return res.send('Your password has been changed, you can login now')
+        }
+        return res.status(404).send('Some thing went wrong')
+    })
+    .catch(err=>res.status(404).send(`Account ${email} not exist`))
 }

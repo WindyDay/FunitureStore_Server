@@ -49,7 +49,10 @@ var UserSchema = new Schema({
         enum: ['unverified', 'verified', 'block'],
         default: 'unverified',  
     },
-    verifyCode: {
+    verifyToken: {
+        type: String,
+    },
+    resetToken: {
         type: String,
     },
 });

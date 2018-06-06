@@ -1,5 +1,8 @@
 const nodemailer = require('nodemailer');
-const {ONL_API_PATH, LOCAL_API_PATH} = require('../constants')
+const {
+    ONL_API_PATH,
+    LOCAL_API_PATH
+} = require('../constants')
 
 // NB! Store the account object values somewhere if you want
 // to re-use the same account for future mail deliveries
@@ -7,7 +10,7 @@ const {ONL_API_PATH, LOCAL_API_PATH} = require('../constants')
 // Create a SMTP transporter object
 
 // Message object
-exports.createVerifyMail = (to, verifyCode) => {
+exports.createVerifyMail = (to, verifyToken) => {
     let message = {
         // Comma separated list of recipients
         from: 'FunitureOnlineShop <icecrystal196@gmail.com>',
@@ -18,7 +21,24 @@ exports.createVerifyMail = (to, verifyCode) => {
 
         // HTML body
         html: `
-        <p>Please <b><a href="${ONL_API_PATH}/user/verify/${to}/${verifyCode}">CLICK HERE</a></b> to verify your account:</p>
+        <p>Please <b><a href="${LOCAL_API_PATH}/user/verify/${to}/${verifyToken}">CLICK HERE</a></b> to verify your account:</p>
+        
+        `
+    };
+    return message;
+}
+exports.createResetPassMail = (to, resetToken) => {
+    let message = {
+        // Comma separated list of recipients
+        from: 'FunitureOnlineShop <icecrystal196@gmail.com>',
+        to: to,
+
+        // Subject of the message
+        subject: 'Password reset for FunitureOnlineShop account',
+
+        // HTML body
+        html: `
+        <p>Please <b><a href="${LOCAL_API_PATH}/user/resetPassword/${to}/${resetToken}">CLICK HERE</a></b> to reset your password:</p>
         
         `
     };

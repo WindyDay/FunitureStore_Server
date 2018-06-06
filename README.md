@@ -113,5 +113,5 @@ result:
 
 <h4>Verify an account: </h4>
 <code>
-    GET => http://localhost:9000/v1/api/user/verify/:email/:verifyCode
+    GET => http://localhost:9000/v1/api/user/verify/:email/:verifyToken
 </code>
