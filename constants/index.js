@@ -7,8 +7,8 @@ const CONST = {
     // ONL_API_PATH: 'http://localhost:9000/v1/api',
     LOCAL_PATH: 'http://localhost:9000',
     LOCAL_API_PATH: 'http://localhost:9000/v1/api',
-    // TEST_API_PATH: 'https://funiture-store.herokuapp.com/v1/api',
-    TEST_API_PATH: 'http://localhost:9000/v1/api',
+    TEST_API_PATH: 'https://funiture-store.herokuapp.com/v1/api',
+    // TEST_API_PATH: 'http://localhost:9000/v1/api',
 }
 
 module.exports = CONST;

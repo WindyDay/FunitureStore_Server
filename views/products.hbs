@@ -8,9 +8,7 @@
                     <ul class="category__list">
                         <li class="category__item active">Tất cả</li>
                         {{#each categories}}
-                        <li class="category__item">
-                            {{this.name}}
-                        </li>
+                        <li class="category__item">{{this.name}}</li>
                         {{/each}}
                     </ul>
                 </div>
@@ -27,7 +25,8 @@
                         {{/each}}
                     </ul>
                 </div>
-                {{!-- <h4 class="category__title mt-4">Chất liệu</i>
+                {{!--
+                <h4 class="category__title mt-4">Chất liệu</i>
                 </h4>
                 <div class="category__container">
                     <div class="select-wrapper">
