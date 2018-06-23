@@ -75,7 +75,7 @@ function userCreate(email, password, fullName, phone, avatarURL, birthday, creat
     });
 }
 
-function productCreate(name, categories, thumbnail, images, oldPrice, price, modifiedDate, description, author, colors, cb) {
+function productCreate(name, categories, thumbnail, images, oldPrice, price, modifiedDate, description, author, colors, views, cb) {
     var productDetail = {
         name: name,
         categories: categories,
@@ -96,6 +96,9 @@ function productCreate(name, categories, thumbnail, images, oldPrice, price, mod
         productDetail.modifiedDate = modifiedDate;
     if (colors == false){
         productDetail.color = [_colors[1]]
+    }
+    if (views != false){
+        productDetail.views = views
     }
     
     product = new Product(productDetail);
@@ -216,6 +219,7 @@ function createProducts(cb) {
             'Đôn gỗ cao su tự nhiên với kiểu dáng Scandinavian đơn giản, dễ di chuyển và bố trí', 
             _users[3], 
             [_colors[3], _colors[5]],
+            2,
             callback);
         },
         function (callback) {
@@ -234,6 +238,7 @@ function createProducts(cb) {
             'Chiếc sofa "click-clack" có thể mở rộng thành giường trong tích tắc. Sofa giường TEMASEK có khung gỗ chắc chắn và phần đệm êm ái, cho bạn cảm giác thoải mái cả khi ngồi hay nằm. Sản phẩm thích hợp cho căn hộ nhỏ hoặc khi bạn có khách đột xuất.', 
             _users[3], 
             [_colors[2], _colors[0]],
+            5,
             callback);
         },
         function (callback) {
@@ -254,6 +259,7 @@ function createProducts(cb) {
             'Ghế sofa 2 chỗ NORMANDY có thiết kế hiện đại, đẹp mắt với khung gỗ chắc chắn và đệm ngồi êm ái. Hãy kết hợp vài chiếc sofa này với bàn cà phê và ghế bành NORMANDY để tiếp đãi bạn bè và khách quý đến nhà.', 
             _users[3], 
             [_colors[0]],
+            1,
             callback);
         },
         function (callback) {
@@ -274,6 +280,7 @@ function createProducts(cb) {
             '', 
             _users[3], 
             [_colors[8]],
+            6,
             callback);
         },
         function (callback) {
@@ -293,6 +300,7 @@ function createProducts(cb) {
             'Ghế sofa 3 chỗ BOGART mang phong cách Bắc Âu cổ điển với đặc trưng là lưng tựa chần nút và chân ghế chạm khắc. Khung ghế từ gỗ đặc đem lại sự vững chắc và độ bền cao. Đệm ngồi êm ái từ mút bọc polyester kết hợp lưng tựa chần nút để giữ phom dáng ghế và đưa vẻ đẹp sang trọng vào tổ ấm.', 
             _users[3], 
             [_colors[5]],
+            false,
             callback);
         },
 
@@ -317,6 +325,7 @@ function createProducts(cb) {
             Cover: Microfiber',`,
             _users[3], 
             [_colors[2]],
+            false,
             callback);
         },
 

@@ -49,7 +49,19 @@ var ProductSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'colors',
         required: true
-    }]
+    }],
+    quantitySold:{
+        type: Number,
+        min: 0,
+        required: true,
+        default: 0
+    },
+    views:{
+        type: Number,
+        min: 0,
+        required: true,
+        default: 0
+    }
 });
 ProductSchema.statics = {
     /**
@@ -57,7 +69,7 @@ ProductSchema.statics = {
      * @param  {function} cb
      */
     load: (options, cb) => {
-        let select = options.select || 'name oldPrice price thumbnail categories'
+        let select = options.select || 'name oldPrice price thumbnail categories views'
         let page = options.page || CONST.DEFAULT_PAGE
         let maxResults = options.maxResults || CONST.MAX_RESULTS
         let categories = options.categories || null
@@ -67,6 +79,7 @@ ProductSchema.statics = {
         let nameSort = options.nameSort * 1;
         let priceSort = options.priceSort * 1;
         let searchKey = options.searchKey;
+        let viewsSort = options.viewsSort;
 
 
         let query = productsModel.find()
@@ -80,6 +93,9 @@ ProductSchema.statics = {
         })
         if (priceSort) query.sort({
             price: priceSort
+        })
+        if (viewsSort) query.sort({
+            views: viewsSort
         })
         if (searchKey) query.where({
             'name': new RegExp(searchKey, ["i"])
@@ -123,7 +139,7 @@ ProductSchema.statics = {
      * @param  {function} cb
      */
     getById: (id, cb) => {
-        return productsModel.findById(id, cb)
+        return productsModel.findByIdAndUpdate(id, {$inc: { views: 1 }}, cb)
             .populate({
                 path: 'colors'
             });

@@ -39,14 +39,19 @@ default: page = 1 | maxResult = 16
     http://localhost:9000/v1/api/products?minPrice=2000000&maxPrice=5000000
 </code>
 
-<h4> Get products lists (price sort: 1=ASCE || -1=DESC): </h4>
+<h4> Get products lists (Sort by price: 1=ASCE || -1=DESC): </h4>
 <code>
     http://localhost:9000/v1/api/products?priceSort=1
 </code>
 
-<h4> Get products lists (name sort: 1=ASCE || -1=DESC): </h4>
+<h4> Get products lists (Sort by name: 1=ASCE || -1=DESC): </h4>
 <code>
     http://localhost:9000/v1/api/products?nameSort=1
+</code>
+
+<h4> Get products lists (Sort by views: 1=ASCE || -1=DESC): </h4>
+<code>
+http://localhost:9000/v1/api/products?viewsSort=-1
 </code>
 
 <h4> Search products: </h4>

@@ -29,6 +29,7 @@ function getProducts(req, res, next) {
     options.nameSort = req.query.nameSort;
     options.priceSort = req.query.priceSort;
     options.searchKey = req.query.searchKey;
+    options.viewsSort = req.query.viewsSort;
 
     //categories query
     if (req.query.categories) {
