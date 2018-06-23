@@ -80,6 +80,7 @@ ProductSchema.statics = {
         let priceSort = options.priceSort * 1;
         let searchKey = options.searchKey;
         let viewsSort = options.viewsSort;
+        let dateSort = options.dateSort;
 
 
         let query = productsModel.find()
@@ -96,6 +97,9 @@ ProductSchema.statics = {
         })
         if (viewsSort) query.sort({
             views: viewsSort
+        })
+        if (dateSort) query.sort({
+            modifiedDate: dateSort
         })
         if (searchKey) query.where({
             'name': new RegExp(searchKey, ["i"])

@@ -30,6 +30,7 @@ function getProducts(req, res, next) {
     options.priceSort = req.query.priceSort;
     options.searchKey = req.query.searchKey;
     options.viewsSort = req.query.viewsSort;
+    options.dateSort = req.query.dateSort;
 
     //categories query
     if (req.query.categories) {
