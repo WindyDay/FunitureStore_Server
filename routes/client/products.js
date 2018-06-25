@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 let axios = require('axios');
 const CONST = require('../../constants');
+const _ = require('lodash')
 
 
 _axios = axios.create({
@@ -49,11 +50,20 @@ function renderProductDetail(req, res, next) {
   let data = null;
 
   _axios.get('/products/' + req.params.productId)
-    .then(function (response) {
-      // console.log(response.data);
-      res.render('product', {
-        product: response.data
-      });
+    .then(function (productDetail) {
+      // &categories=${productDetail.categories[0].name}
+      let category = _.get(productDetail.data, 'categories[0].name', undefined);
+      _axios.get(`/products?maxResults=10`+(category?'&categories='+category:''))
+        .then((similarProducts)=>{
+          console.log(category);
+          console.log(productDetail.data.categories);
+          console.log(productDetail.data.categories[0].name);
+          res.render('product', {
+            product: productDetail.data,
+            similarProducts: similarProducts.data
+          });
+        })
+      
     })
     .catch(function (error) {
       console.log(error);

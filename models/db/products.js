@@ -145,7 +145,7 @@ ProductSchema.statics = {
     getById: (id, cb) => {
         return productsModel.findByIdAndUpdate(id, {$inc: { views: 1 }}, cb)
             .populate({
-                path: 'colors'
+                path: 'colors categories'
             });
     }
 }

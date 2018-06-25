@@ -174,33 +174,11 @@
 
     <h3 class="otherProductsHeader">SẢN PHẨM KHÁC</h3>
     <div id="otherProducts">
-        <div>
-            <img src="/images/product-2.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-1.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-2.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-1.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-2.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-1.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-2.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-1.jpg" alt="">
-        </div>
-        <div>
-            <img src="/images/product-2.jpg" alt="">
-        </div>
+        {{#each similarProducts}}
+            <div>
+                <a href="/products/{{this._id}}"><img src="{{this.thumbnail}}" alt="" ></a>
+            </div>
+        {{/each}}
     </div>
 
 </section>
