@@ -292,7 +292,7 @@ const ADMIN = {
 
     $('.categories-table').on('click', '.btn-admin-edit', e => {
       const thisCategoryName = $(e.target).parent().prev().text();
-      console.log(thisCategoryName);
+      // console.log(thisCategoryName);
       currentIDCategory = $(e.target).data('id');
       $('#input-category-edit').val(thisCategoryName);
     });
@@ -726,7 +726,7 @@ const STORE = {
                 maxResults: 4
             }
         }).done(data => {
-            console.log(data.length);
+            // console.log(data.length);
             if (data.length) {
                 $('.most-product.row').html('');
                 data.forEach(product => {
@@ -758,7 +758,7 @@ const STORE = {
                 maxResults: 3
             }
         }).done(data => {
-            console.log(data.length);
+            // console.log(data.length);
             if (data.length) {
                 $('.new-product.row').html('');
                 data.forEach(product => {

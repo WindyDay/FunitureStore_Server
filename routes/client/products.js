@@ -55,9 +55,7 @@ function renderProductDetail(req, res, next) {
       let category = _.get(productDetail.data, 'categories[0].name', undefined);
       _axios.get(`/products?maxResults=10`+(category?'&categories='+category:''))
         .then((similarProducts)=>{
-          console.log(category);
-          console.log(productDetail.data.categories);
-          console.log(productDetail.data.categories[0].name);
+          
           res.render('product', {
             product: productDetail.data,
             similarProducts: similarProducts.data
