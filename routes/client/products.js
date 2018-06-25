@@ -3,6 +3,7 @@ var router = express.Router();
 let axios = require('axios');
 const CONST = require('../../constants');
 const _ = require('lodash')
+const productModel = require ('../../models/db/products.js')
 
 
 _axios = axios.create({
@@ -51,16 +52,21 @@ function renderProductDetail(req, res, next) {
 
   _axios.get('/products/' + req.params.productId)
     .then(function (productDetail) {
-      // &categories=${productDetail.categories[0].name}
-      let category = _.get(productDetail.data, 'categories[0].name', undefined);
-      _axios.get(`/products?maxResults=10`+(category?'&categories='+category:''))
-        .then((similarProducts)=>{
-          
-          res.render('product', {
-            product: productDetail.data,
-            similarProducts: similarProducts.data
-          });
-        })
+      let category =  productDetail.data.categories.map(category=>category.name);
+      let similarProducts = productModel.load({maxResults:'10', categories:category.length!=0?category:undefined}, (err, result)=>{
+        if(err) console.log(err);
+        res.render('product', {
+          product: productDetail.data,
+          similarProducts: result
+        });
+      })
+      
+      // console.log('similarProducts');
+      // console.log(similarProducts);
+      // res.render('product', {
+      //   product: productDetail.data,
+      //   similarProducts: similarProducts
+      // });
       
     })
     .catch(function (error) {
