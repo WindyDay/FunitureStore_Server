@@ -14,7 +14,7 @@ const {
 exports.createVerifyMail = (to, verifyToken) => {
     let message = {
         // Comma separated list of recipients
-        from: 'FunitureOnlineShop <icecrystal196@gmail.com>',
+        from: 'FunitureOnlineShop <001.tempmailer@gmail.com>',
         to: to,
 
         // Subject of the message
@@ -31,7 +31,7 @@ exports.createVerifyMail = (to, verifyToken) => {
 exports.createResetPassMail = (to, resetToken) => {
     let message = {
         // Comma separated list of recipients
-        from: 'FunitureOnlineShop <icecrystal196@gmail.com>',
+        from: 'FunitureOnlineShop <001.tempmailer@gmail.com>',
         to: to,
 
         // Subject of the message
@@ -50,7 +50,7 @@ exports.sendMail = (message) => {
     let transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'icecrystal196@gmail.com',
+            user: '001.tempmailer@gmail.com',
             pass: 'lovean123'
         }
     }, );
