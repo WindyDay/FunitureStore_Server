@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const usersModel = require('../../models/db/users')
-const _ = require('lodash')
+const usersModel = require('../../models/db/users');
+const _ = require('lodash');
 const md5 = require('md5');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
@@ -21,9 +21,11 @@ router.post('/SignIn', standardizeEmail, passport.authenticate('local', {
 
 router.put('/role', updateRole)
 
-router.get('/verify/:email/:verifyToken', verifyAccount)
-router.post('/forgetPassword', forgetPassword)
-router.post('/resetPassword', resetPassword)
+router.get('/verify/:email/:verifyToken', verifyAccount);
+router.post('/forgetPassword', forgetPassword);
+router.post('/resetPassword', resetPassword);
+router.put('/addToCart/:productID', addToCart);
+
 module.exports = router;
 
 
@@ -77,6 +79,7 @@ function signUp(req, res, next) {
 // }
 
 function standardizeEmail(req, res, next){
+    console.log(req.body.email);
     req.body.email = req.body.email.trim().toLowerCase();
     next();
 }
@@ -144,3 +147,19 @@ function resetPassword(req, res, next) {
     })
     .catch(err=>res.status(404).send(`Account ${email} not exist`))
 }
+
+function addToCart(req, res, next) {
+    const productID = req.params.productID;
+    usersModel.findOne({ email: req.body.email }).exec()
+    .then((result)=>{
+        result.cart.push({
+            productID: productID
+        });
+        console.log(result.cart);
+        result.save(err=>{
+            if(err) res.status(404).send(err)
+            res.status(200).send("Added product to cart")
+        });
+    })
+    .catch(err=>res.status(404).send(err))
+}   

@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
     email: {
@@ -55,6 +55,14 @@ var UserSchema = new Schema({
     resetToken: {
         type: String,
     },
+    cart: [
+        {
+            productID: {
+                type: Schema.ObjectId,
+                ref: 'products'
+            }
+        }
+    ]
 });
 UserSchema.statics ={
     matchPassword : (pass1, pass2)=>{
