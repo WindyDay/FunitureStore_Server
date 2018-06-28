@@ -6,7 +6,7 @@ const md5 = require('md5');
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
 const crypto = require('crypto')
-const mailer = require('../mailer')
+const mailer = require('../../models/mailer')
 
 router.post('/SignUp', signUp);
 

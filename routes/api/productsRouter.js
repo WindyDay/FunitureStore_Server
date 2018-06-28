@@ -5,7 +5,7 @@ const _ = require('lodash')
 const CONST = require('../../constants');
 const formidable = require('formidable')
 const path = require('path')
-const auth = require('../authorization');
+const auth = require('../../models/authorization');
 
 router.get('/', getProducts);
 router.get('/:productId', getProductById);
