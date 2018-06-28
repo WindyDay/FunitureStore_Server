@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const categoriesModel = require('../../models/db/categories')
-const auth = require('../authorization');
+const auth = require('../../models/authorization');
 
 router.get('/', getAllCategories);
 router.post('/', auth.ModAuthorized, addCategory);
