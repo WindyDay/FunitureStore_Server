@@ -231,6 +231,84 @@ ProductSchema.statics = {
             .catch(err => res.status(400).send(err));
 
         // console.log(productInfo);
+    },
+    editProductFormParseCb: (err, fields, files) => {
+        if (err) return res.status(400).send(err);
+        // if (!req.user) return res.send('Need to login first')
+
+        let productInfo = {
+            name: fields.name,
+            oldPrice: fields.oldPrice,
+            price: fields.price,
+            description: fields.description,
+            // author: req.user._id,
+        };
+        let deletedImages = fields.deletedImages;
+        let categories = fields.categories;
+        let colors = fields.colors;
+        try {
+            if (deletedImages)
+                deletedImages = JSON.parse(fields.deletedImages);
+            if (categories)
+                categories = JSON.parse(fields.categories);
+            if (colors)
+                colors = JSON.parse(fields.colors);
+
+        } catch (err) {
+            console.log(err);
+            return res.status(400).send(err)
+        }
+        // console.log(deletedImages);
+
+        let oldImages = null;
+        let newlyAddedImages = [];
+        if (categories) categories = _.flatten([categories]);
+        if (deletedImages) deletedImages = _.flatten([deletedImages]);
+        // console.log('deletedImages.length='+deletedImages.length);
+        if (colors) colors = _.flatten([colors]);
+        // console.log(fields);
+        // if (!editedImagesList.length && !files.images) return res.status(400).send('Did not upload enough images')
+        if (files.thumbnail) {
+            Array.isArray(files.thumbnail) ? productInfo.thumbnail = getRelativePath(files.thumbnail[0].path) : productInfo.thumbnail = getRelativePath(files.thumbnail.path);
+        }
+
+        if (files.images) {
+            Array.isArray(files.images) ? files.images.map(image => newlyAddedImages.push(getRelativePath(image.path))) : newlyAddedImages.push(getRelativePath(files.images.path));
+        }
+        for (key in productInfo) {
+            if (!productInfo[key]) delete productInfo[key];
+        }
+
+        // productInfo.images = editedImagesList;\♥
+        productsModel.findById(fields.productID).lean().exec((err, result) => {
+            if (err) return res.status(400).send(err);
+            oldImages = result.images;
+            productInfo.images = [..._.difference(oldImages, deletedImages), ...newlyAddedImages];
+            productInfo.colors = colors;
+            productInfo.categories = categories;
+            if (!productInfo.images.length) return res.status(400).send('Did not upload enough images')
+
+            // console.log(productInfo);
+            let query = {
+                _id: fields.productID
+            }
+            productsModel.updateOne(query, productInfo)
+                .then((result) => {
+                    // console.log(result);
+                    res.send(result);
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(400).send(err)});
+
+        })
+
+        // console.log(productInfo);
+    },
+    getCountOfProducts: (cb)=>{
+        productsModel.count().exec((err, count)=>{
+            cb(err, count);
+        })
     }
 };
 function getRelativePath(fullURL) {

@@ -8,6 +8,7 @@ const path = require('path')
 const auth = require('../../models/authorization');
 
 router.get('/', getProducts);
+router.get('/count', getCountOfProducts);
 router.get('/:productId', getProductById);
 router.post('/', auth.ModAuthorized, addProduct);
 router.put('/', auth.ModAuthorized, editProduct);
@@ -23,6 +24,12 @@ function getProducts(req, res, next) {
     productsModel.load(options, (err, productsResult) => {
         if (err) return res.status(400).send(err);
         res.send(productsResult);
+    })
+}
+function getCountOfProducts(req,res, next){
+    productsModel.getCountOfProducts((err, count)=>{
+        if(err) res.status(400).send(err);
+        res.send({count:count})
     })
 }
 

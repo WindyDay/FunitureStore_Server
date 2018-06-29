@@ -4,7 +4,7 @@ var usersModel = require('../../models/db/users')
 var productsModel = require('../../models/db/products')
 var categoriesModel = require('../../models/db/categories')
 var colorsModel = require('../../models/db/colors')
-const auth = require('../authorization');
+const auth = require('../../models/authorization');
 const os = require('os')
 
 
