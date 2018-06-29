@@ -66,7 +66,7 @@
                             <a class="navbar__link" href="javascript: void(0)">Liên hệ</a>
                         </li>
                         <li class="navbar__item">
-                            <a class="navbar__link navbar__cart" href="javascript: void(0)">
+                            <a class="navbar__link navbar__cart" href="/cart">
                                 <i class="fas fa-cart-plus"></i> Giỏ hàng</a>
                         </li>
                         <li class="navbar__item login-mobile">
@@ -115,8 +115,7 @@
         {{/if}}
     </div>
     {{{body}}}
-
-    <footer class="footer">
+<footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -138,12 +137,64 @@
                 <div class="col-md-6">
                     <h5>Liên hệ</h5>
                     <address>Trường đại học KHTN TPHCM
-                        <br>227, Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM</address>
+                    <br>227, Nguyễn Văn Cừ, phường 4, quận 5, TP.HCM</address>
                 </div>
             </div>
         </div>
         <div class="copy-right text-center">&copy; 2018 by HCMUS</div>
     </footer>
+
+    <div class="popup">
+        <div class="popup__content">
+            <div class="popup__close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h6 class="green-text">
+                        <i class="fas fa-check"></i> 1 sản phẩm mới được thêm vào giỏ hàng của bạn</h6>
+                    <div class="row">
+                        <div class="col-6 col-md-3">
+                            <img class="popup-product-img" src="/images/product-2.jpg" alt="">
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <h5 class="popup-product-name">Ghế lắc gỗ nhỏ</h5>
+                            <p class="popup-product-price">1000000</p>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <p>Số lượng:
+                                <span class="amountProduct">1</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5>Giỏ hàng của tôi</h5>
+                    <h6>(
+                        <span class="amountProduct">1</span> sản phẩm)</h6>
+                    <table class="tableCart">
+                        <tr>
+                            <td>Tạm tính</td>
+                            <td class="text-right temp-price">1000000</td>
+                        </tr>
+                        <tr>
+                            <td>Tổng cộng</td>
+                            <td class="text-right total-price">1000000</td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td class="text-right">Đã bao gồm thuế VAT (nếu có )</td>
+                        </tr>
+                    </table>
+                    <div class="text-right mt-2">
+                        <button id="continueShopping" class="btn">Tiếp tục mua hàng</button>
+                        <button id="payment" class="btn btn-2">Tiến hành thanh toán</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="loader">
         <div class="loader__icon"></div>
     </div>
